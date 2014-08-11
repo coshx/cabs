@@ -10,14 +10,13 @@ module CoordinatesHelper
     triangle_base = right_edge - triangle_edge
     triangle_height = top_edge - bottom_edge
 
-
     random_longitude = rand(left_edge..right_edge)
 
     if random_longitude < triangle_edge
       min_latitude = bottom_edge
     else
       triangle_ratio = (random_longitude - triangle_edge) / triangle_base
-      min_latitude = bottom_edge + (triangle_distance * triangle_height)
+      min_latitude = bottom_edge + (triangle_ratio * triangle_height)
     end
 
     random_latitude = rand(min_latitude..top_edge)
