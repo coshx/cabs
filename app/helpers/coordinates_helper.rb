@@ -12,7 +12,6 @@ module CoordinatesHelper
     triangle_base = right_edge - triangle_edge
     triangle_height = top_edge - bottom_edge
 
-
     random_longitude = rand(left_edge..right_edge)
 
     if random_longitude < triangle_edge
