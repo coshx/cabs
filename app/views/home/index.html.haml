@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{content: "initial-scale=1.0, user-scalable=no", name: "viewport"}/
+    :css
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    %script{src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", type: "text/javascript"}
+      :cdata
+    :javascript
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(40.744,-73.988),
+          zoom: 14,
+          disableDefaultUI: true,
+          draggable: false,
+          disableDoubleClickZoom: true
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+  %body
+    #map-canvas
