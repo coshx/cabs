@@ -8,9 +8,12 @@ Game.Map.load()
 
 cab = new Game.Objects.Car()
 cab.load()
+lyft = new Game.Objects.LyftCar()
+lyft.load()
 
 Game.objects = []
 Game.objects.push cab
+Game.objects.push lyft
 
 $ ->
   Game.canvas = document.getElementById('canvas')
@@ -36,7 +39,8 @@ Game.render = (index) ->
   ctx.fillStyle = '#345678'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.Map.render()
-  cab.render(index)
+  for object in Game.objects
+	object.renderer(index)
 
 Game.lastTime = Date.now()
 
