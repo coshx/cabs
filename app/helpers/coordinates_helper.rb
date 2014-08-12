@@ -42,6 +42,7 @@ module CoordinatesHelper
     end
 
     polyline_array.flatten!(1)
+    return polyline_array
   end
 
 
