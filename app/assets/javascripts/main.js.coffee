@@ -1,16 +1,34 @@
 window.Game ||= {}
 window.Assets ||= {}
 Game.Objects ||= {}
+window.Routes ||= []
 
 Map = Game.Map
 
+Game.randomRoute = ->
+  n = Routes.length
+  Routes[Math.round(Math.random() * n)]
+
 Game.Map.load()
 lyft = new Game.Objects.LyftCar()
-
 cab = new Game.Objects.UberCar()
 
 Game.objects = []
-Game.objects.push cab
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+Game.objects.push new Game.Objects.UberCar()
+
+
 Game.objects.push lyft
 
 $ ->

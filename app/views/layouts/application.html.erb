@@ -2,9 +2,14 @@
 <html>
 <head>
   <title>Cabs</title>
+  <script>
+    Routes = <%= read_routes_list.to_json %>;
+  </script>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
