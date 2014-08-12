@@ -56,11 +56,16 @@ module CoordinatesHelper
     end
   end
 
-  def get_routes
-    csv_text = File.read('...')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Moulding.create!(row.to_hash)
+  def read_routes_list
+    routes = CSV.read("lib/routes.csv")
+    for m in 0 ... routes.size
+      route = routes[m]
+      for n in 0 ... route.size
+        route[n] = route[n].delete('[]').split(", ").map(&:to_f)
+      end
+      routes[m]=route
     end
+    return routes.shuffle
   end
+
 end
