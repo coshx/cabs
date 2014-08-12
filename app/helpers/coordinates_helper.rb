@@ -34,8 +34,14 @@ module CoordinatesHelper
     startAddr = URI::encode(HTTParty.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+startCoord[0].to_s+','+startCoord[1].to_s+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop')['results'][0]['formatted_address'])
     endAddr = URI::encode(HTTParty.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+endCoord[0].to_s+','+endCoord[1].to_s+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop')['results'][0]['formatted_address'])
     directions = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin='+startAddr+'&destination='+endAddr+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc')
+    polyline_array = []
+    directions["routes"][0]["legs"][0]["steps"].each do |step|
+      encoded_points = step["polyline"]["points"]
+      decoded_points = Polylines::Decoder.decode_polyline(encoded_points)
+      polyline_array.push(decoded_points)
+    end
 
-    return directions
+    polyline_array.flatten!(1)
   end
 
 

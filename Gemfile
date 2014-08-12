@@ -41,4 +41,5 @@ gem 'spring',        group: :development
 gem 'haml'
 gem 'httparty'
 gem 'pry'
+gem 'polylines'
 
