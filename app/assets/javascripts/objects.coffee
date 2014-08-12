@@ -3,13 +3,13 @@ window.Assets ||= {}
 Game.Objects = {}
 
 Game.User =
-  score: 0
+  score: 0.0
   addScore: (score) ->
-    if score > 0
+    if score > 0.0
       @score = @score + score
       @render()
   render: ->
-    $("#score").text(@score)
+    $("#score").text(@score.toFixed(2))
 
 Game.Map =
   topLeft: [40.758014, -74.013621]
@@ -65,6 +65,7 @@ class Game.Objects.Car
   uturn: 0
   alive: true
   distance: 0
+  totalDistance: 0
   constructor: ->
     @route = Game.randomRoute()
     @width = 70
@@ -82,7 +83,7 @@ class Game.Objects.Car
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
-    Game.User.addScore(1) if scores
+    Game.User.addScore(@fare()) if scores
   currentSprite: ->
     if @alive
       @sprite
@@ -105,6 +106,10 @@ class Game.Objects.Car
 
     Math.sqrt( xs + ys )
 
+  fare: ->
+    base = 2.0
+    (@totalDistance / 1000) + base
+
   move: (index) ->
     if @alive
       x = @pos[0]
@@ -118,6 +123,7 @@ class Game.Objects.Car
       @pos[0] = @pos[0] + x
       @pos[1] = @pos[1] - y
       @distance = @distance + index * 100
+      @totalDistance += @distance
       if @distance >= @currentDistance
         @getNextDestination()
 
