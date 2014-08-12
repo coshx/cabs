@@ -13,6 +13,7 @@ Game.Map.load()
 Game.objects = []
 
 $ ->
+  $(".fade").fadeIn()
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     for object in Game.objects
@@ -31,7 +32,7 @@ $ ->
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.main()
   $(".button").click ->
-    $(".fade").hide()
+    $(".fade").fadeOut()
     Game.objects.push new Game.Objects.UberCar()
 
 Game.render = (index) ->
