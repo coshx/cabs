@@ -5,26 +5,27 @@ Game.Objects ||= {}
 Map = Game.Map
 
 Game.Map.load()
-#lyft = new Game.Objects.LyftCar()
+lyft = new Game.Objects.LyftCar()
 
 cab = new Game.Objects.UberCar()
 
 Game.objects = []
 Game.objects.push cab
-#Game.objects.push lyft
+Game.objects.push lyft
 
 $ ->
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     for object in Game.objects
-      x = object.pos[0] + Map.pos[0] + object.width/2
-      y = object.pos[1] + Map.pos[1] + object.height/2
+      x = object.pos[0] + Map.pos[0] 
+      y = object.pos[1] + Map.pos[1] - object.height / 2
       console.log "X ", e.clientX, x
-      if e.clientX > x && e.clientX < x + object.width && e.clientY > y && e.clientY < y + object.height
+      a = 20
+      if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill()
   canvas = Game.canvas
-  canvas.width = $(window).width() - 20
-  canvas.height = $(window).height()
+  canvas.width = Game.Map.width
+  canvas.height = Game.Map.height
   Game.ctx = canvas.getContext("2d")
   ctx = Game.ctx
   ctx.fillStyle = "#000000"
