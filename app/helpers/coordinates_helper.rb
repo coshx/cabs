@@ -33,9 +33,12 @@ module CoordinatesHelper
     endCoord = get_coordinates
     startAddr = URI::encode(HTTParty.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+startCoord[0].to_s+','+startCoord[1].to_s+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop')['results'][0]['formatted_address'])
     endAddr = URI::encode(HTTParty.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+endCoord[0].to_s+','+endCoord[1].to_s+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop')['results'][0]['formatted_address'])
-    directions = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin='+startAddr+'&destination='+endAddr+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc')
-
-    return directions
+    steps = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin='+startAddr+'&destination='+endAddr+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc')['routes'][0]['legs'][0]['steps']
+    routeLines = []
+    steps.each do |s|
+      routeLines.push(s["polyline"]["points"])
+    end
+    return routeLines
   end
 
 
