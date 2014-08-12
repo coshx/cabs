@@ -55,4 +55,17 @@ module CoordinatesHelper
       end
     end
   end
+
+  def read_routes_list
+    routes = CSV.read("lib/routes.csv")
+    for m in 0 ... routes.size
+      route = routes[m]
+      for n in 0 ... route.size
+        route[n] = route[n].delete('[]').split(", ").map(&:to_f)
+      end
+      routes[m]=route
+    end
+    return routes
+  end
+
 end
