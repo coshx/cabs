@@ -55,4 +55,12 @@ module CoordinatesHelper
       end
     end
   end
+
+  def get_routes
+    csv_text = File.read('...')
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      Moulding.create!(row.to_hash)
+    end
+  end
 end

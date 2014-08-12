@@ -5,17 +5,13 @@ Game.Objects ||= {}
 Map = Game.Map
 
 Game.Map.load()
-lyft = new Game.Objects.LyftCar()
+#lyft = new Game.Objects.LyftCar()
 
 cab = new Game.Objects.UberCar()
-#lyft.angle = 200
-
-cab.angle = 100
-lyft.angle = 200
 
 Game.objects = []
 Game.objects.push cab
-Game.objects.push lyft
+#Game.objects.push lyft
 
 $ ->
   Game.canvas = document.getElementById('canvas')

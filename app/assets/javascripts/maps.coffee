@@ -13,9 +13,9 @@ $ ->
     image = Assets.BlackUber.sprite
     myLatLng = new google.maps.LatLng(40.744, -73.988)
     beachMarker = new google.maps.Marker(
-      position: myLatLng
-      map: map
-      icon: image
+      #position: myLatLng
+      #map: map
+      #icon: image
     )
 
   google.maps.event.addDomListener window, "load", initialize
