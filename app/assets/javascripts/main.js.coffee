@@ -46,10 +46,16 @@ Game.render = (index) ->
 
 Game.lastTime = Date.now()
 
+alive = (a) ->
+  a.alive
+
+
 #main loop
 Game.main = ->
   now = Date.now()
   dt = (now - Game.lastTime) / 1000.0
   Game.render(dt)
   Game.lastTime = now
+  if Game.objects.filter(alive).length < 5
+    Game.objects.push new Game.Objects.UberCar()
   window.setTimeout Game.main, 1000 / 60
