@@ -4,9 +4,10 @@ Game.Objects = {}
 
 Game.User =
   score: 0
-  addScore: ->
-    @score = @score + 1
-    @render()
+  addScore: (score) ->
+    if score > 0
+      @score = @score + score
+      @render()
   render: ->
     $("#score").text(@score)
 
@@ -81,7 +82,7 @@ class Game.Objects.Car
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
-    Game.User.addScore() if scores
+    Game.User.addScore(1) if scores
   currentSprite: ->
     if @alive
       @sprite

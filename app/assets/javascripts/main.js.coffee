@@ -16,13 +16,16 @@ $ ->
   $(".fade").fadeIn()
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
-    for object in Game.objects
+    killed = 0
+    for object in Game.objects.filter(alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1] - object.height / 2
       console.log "X ", e.clientX, x
       a = 20
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill(true)
+        killed = killed + 1
+    Game.User.addScore(killed - 1)
   canvas = Game.canvas
   canvas.width = Game.Map.width
   canvas.height = Game.Map.height
