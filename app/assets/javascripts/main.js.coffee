@@ -5,11 +5,12 @@ Game.Objects ||= {}
 Map = Game.Map
 
 Game.Map.load()
-
-cab = new Game.Objects.Car()
-cab.load()
 lyft = new Game.Objects.LyftCar()
 lyft.load()
+cab = new Game.Objects.UberCar()
+cab.angle = 150
+
+cab.load()
 
 Game.objects = []
 Game.objects.push cab
@@ -40,7 +41,7 @@ Game.render = (index) ->
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.Map.render()
   for object in Game.objects
-	object.renderer(index)
+    object.render(index)
 
 Game.lastTime = Date.now()
 
