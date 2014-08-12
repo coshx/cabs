@@ -12,16 +12,19 @@ canvas {
 	color: #FF0000;
 	margin: 5px;
 }
+.wrapper {
+	position: absolute;
+}
 .outside-box {
 	height: auto;
 	width: auto;
 	background-color: black;
 	z-index: 2;
-	position: relative;
-	right: -73%;
+	position: fixed;
+	left: 1000px;
+	top: 15px;
 	padding: 7px;
 	display: inline-block;
-	top: 400px;
 	border-radius: 5px;
 }
 .inside-box {
