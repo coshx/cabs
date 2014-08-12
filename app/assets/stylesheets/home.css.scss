@@ -39,3 +39,35 @@ canvas {
 	margin-bottom: 0px;
 	text-align: center;
 }
+.fade {
+	background: rgba(0,0,0,0.3);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100;
+	.message {
+		position: fixed;
+		background: white;
+		border-radius: 3px;
+		border: 2px solid rgba(0,0,0,0.7);
+		width: 500px;
+		height: 250;
+		top: 50%;
+		left: 50%;
+		margin-left: -250px;
+		margin-top: -125px;
+		padding: 20px;
+		.button {
+			background: rgb(247, 227, 0);
+			border-radius: 3px;
+			padding: 5px;
+			cursor: pointer;
+			text-align: center;
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+	}
+}

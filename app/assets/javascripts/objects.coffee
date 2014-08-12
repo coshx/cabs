@@ -77,11 +77,11 @@ class Game.Objects.Car
   makeUturn: ->
     if @uturn <= 0
       @uturn = 180
-  kill: ->
+  kill: (scores) ->
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
-    Game.User.addScore()
+    Game.User.addScore() if scores
   currentSprite: ->
     if @alive
       @sprite

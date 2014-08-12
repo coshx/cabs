@@ -10,37 +10,18 @@ Game.randomRoute = ->
   Routes[Math.round(Math.random() * n)]
 
 Game.Map.load()
-lyft = new Game.Objects.LyftCar()
-cab = new Game.Objects.UberCar()
-
 Game.objects = []
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-Game.objects.push new Game.Objects.UberCar()
-
-
-Game.objects.push lyft
 
 $ ->
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     for object in Game.objects
-      x = object.pos[0] + Map.pos[0] 
+      x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1] - object.height / 2
       console.log "X ", e.clientX, x
       a = 20
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
-        object.kill()
+        object.kill(true)
   canvas = Game.canvas
   canvas.width = Game.Map.width
   canvas.height = Game.Map.height
@@ -49,6 +30,9 @@ $ ->
   ctx.fillStyle = "#000000"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.main()
+  $(".button").click ->
+    $(".fade").hide()
+    Game.objects.push new Game.Objects.UberCar()
 
 Game.render = (index) ->
   ctx = Game.ctx
