@@ -8,6 +8,7 @@ canvas {
 	font-family: 'Digital';
 	font-size: 80px;
 	color: #FF0000;
+	margin: 5px;
 }
 .outside-box {
 	height: auto;
@@ -19,11 +20,20 @@ canvas {
 	padding: 7px;
 	display: inline-block;
 	top: 400px;
-	color: white;
+	border-radius: 5px;
 }
 .inside-box {
 	height: auto;
 	width: auto;
 	background-color: #710000;
 	border: 1px solid #980000;
+	min-width: 216px;
+	border-radius: 5px;
+}
+.outside-box p{
+	color: white;
+	font-family: 'Arial';
+	margin-top: 5px;
+	margin-bottom: 0px;
+	text-align: center;
 }
