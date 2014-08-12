@@ -29,11 +29,18 @@ module CoordinatesHelper
   end
 
   def get_directions
-    startCoord = get_coordinates
-    endCoord = get_coordinates
-    startAddr = URI::encode(HTTParty.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+startCoord[0].to_s+','+startCoord[1].to_s+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop')['results'][0]['formatted_address'])
-    endAddr = URI::encode(HTTParty.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+endCoord[0].to_s+','+endCoord[1].to_s+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop')['results'][0]['formatted_address'])
-    directions = HTTParty.get('https://maps.googleapis.com/maps/api/directions/json?origin='+startAddr+'&destination='+endAddr+'&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc')
+    start_coordinates = get_coordinates
+    mid_coordinates = get_coordinates
+    end_coordinates = get_coordinates
+    puts "getting start address"
+    start_address = URI::encode(HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=#{start_coordinates[0]},#{start_coordinates[1]}&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop")['results'][0]['formatted_address'])
+    puts "getting mid address"
+    mid_address = URI::encode(HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=#{mid_coordinates[0]},#{mid_coordinates[1]}&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop")['results'][0]['formatted_address'])
+    puts "getting end address"
+    end_address = URI::encode(HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=#{end_coordinates[0]},#{end_coordinates[1]}&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc&location_type=rooftop")['results'][0]['formatted_address'])
+    puts "getting directions"
+    directions = HTTParty.get("https://maps.googleapis.com/maps/api/directions/json?origin=#{start_address}&destination=#{end_address}&waypoints=via:#{mid_address}&key=AIzaSyAuAQGWRXZ1t-sjDqU0zWVZWmdOBIoHbOc")
+    puts "decoding points"
     polyline_array = []
     directions["routes"][0]["legs"][0]["steps"].each do |step|
       encoded_points = step["polyline"]["points"]
@@ -49,6 +56,7 @@ module CoordinatesHelper
   def build_routes_list
     CSV.open("lib/routes.csv", "ab") do |csv|
       250.times do |n|
+        puts
         puts "starting #{n}"
         route = get_directions
         csv << route
