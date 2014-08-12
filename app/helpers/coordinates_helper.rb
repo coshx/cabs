@@ -65,7 +65,7 @@ module CoordinatesHelper
       end
       routes[m]=route
     end
-    return routes
+    return routes.shuffle
   end
 
 end
