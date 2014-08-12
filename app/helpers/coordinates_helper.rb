@@ -46,4 +46,13 @@ module CoordinatesHelper
   end
 
 
+  def build_routes_list
+    CSV.open("lib/routes.csv", "ab") do |csv|
+      250.times do |n|
+        puts "starting #{n}"
+        route = get_directions
+        csv << route
+      end
+    end
+  end
 end
