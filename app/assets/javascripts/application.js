@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require assets
 //= require objects
-//= require maps
+//= require main

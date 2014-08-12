@@ -25,7 +25,7 @@ Game.Map =
     if @sprite
       ctx.drawImage(@sprite, x, y)
 
-class Game.Objects.Car
+class Game.Objects.UberCar
   speed: 0
   step: 5
   pos: [100, 100]
@@ -38,6 +38,8 @@ class Game.Objects.Car
   uturn: 0
   alive: true
   distance: 0
+  constructor: ->
+    @load()
   makeUturn: ->
     if @uturn <= 0
       @uturn = 180
@@ -46,7 +48,6 @@ class Game.Objects.Car
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
     Game.User.addScore()
-
   currentSprite: ->
     if @alive
       @sprite
@@ -55,10 +56,38 @@ class Game.Objects.Car
   load: ->
     image = new Image()
     image.src = @image
-    @sprite= image
+    @sprite = image
     image = new Image()
     image.src = @deadImage
     @deadSprite = image
+
+  image: Assets.BlackUber.sprite
+
+  move: (index) ->
+    if @alive
+      x = @pos[0] + @width /2
+      y = @pos[1] + @height/2
+
+      if (y < @width || x < @height || x > Game.canvas.width - @width|| y > Game.canvas.height - @height)&&(@uturn <= 0)
+        @makeUturn()
+      lag = index * 100
+      x = Math.sin(@angle * Math.PI/180) * lag
+      y = Math.cos(@angle * Math.PI/180) * lag
+      @pos[0] = @pos[0] + x
+      @pos[1] = @pos[1] - y
+      @distance = @distance + index
+      currentStep = Math.round(@distance/0.15)
+      if currentStep != @currentStep
+        if currentStep/3 == Math.floor(@currentStep/3)
+          if @uturn <= 0
+            @angle = @angle + (Math.random() * 50 - 25)
+          else
+            @uturn = @uturn - 10
+            if @uturn >= 110
+              @angle = @angle - 30
+
+      @currentStep = currentStep
+
   render: (index) ->
     @move(index)
     ctx = Game.ctx
@@ -71,8 +100,42 @@ class Game.Objects.Car
       ctx.drawImage(@currentSprite(), -@width/2, -@height/3*2)
     ctx.restore()
 
+class Game.Objects.LyftCar
+  speed: 0
+  step: 5
+  pos: [100, 100]
+  width: 70
+  height: 70
+  loaded: false
+  spritesLoaded: 0
+  deadImage:  Assets.BlackUber.explodeSprite
+  angle: 100
+  uturn: 0
+  alive: true
+  distance: 0
+  constructor: ->
+    @load()
+  makeUturn: ->
+    if @uturn <= 0
+      @uturn = 180
+  kill: ->
+    @alive = false
+    Game.objects.splice(Game.objects.indexOf(@), 1)
+    Game.objects.unshift(@)
+    Game.User.addScore()
+  currentSprite: ->
+    if @alive
+      @sprite
+    else
+      @deadSprite
+  load: ->
+    image = new Image()
+    image.src = @image
+    @sprite = image
+    image = new Image()
+    image.src = @deadImage
+    @deadSprite = image
 
-class Game.Objects.LyftCar extends Game.Objects.Car
   image: Assets.Lyft.sprite
 
   render: (index) ->
@@ -84,10 +147,10 @@ class Game.Objects.LyftCar extends Game.Objects.Car
       ctx.drawImage(@currentSprite(), x, y)
 
   move: (index) ->
+
     if @alive
       x = @pos[0] + @width /2
       y = @pos[1] + @height/2
-
 
       if (y < @width || x < @height || x > Game.canvas.width - @width|| y > Game.canvas.height - @height)&&(@uturn <= 0)
         @makeUturn()
@@ -109,33 +172,5 @@ class Game.Objects.LyftCar extends Game.Objects.Car
 
       @currentStep = currentStep
 
-class Game.Objects.UberCar extends Game.Objects.Car
-
-  image: Assets.BlackUber.sprite
-
-  move: (index) ->
-    console.log @angle
-    if @alive
-      x = @pos[0] + @width /2
-      y = @pos[1] + @height/2
 
 
-      if (y < @width || x < @height || x > Game.canvas.width - @width|| y > Game.canvas.height - @height)&&(@uturn <= 0)
-        @makeUturn()
-      lag = index * 100
-      x = Math.sin(@angle * Math.PI/180) * lag
-      y = Math.cos(@angle * Math.PI/180) * lag
-      @pos[0] = @pos[0] + x
-      @pos[1] = @pos[1] - y
-      @distance = @distance + index
-      currentStep = Math.round(@distance/0.15)
-      if currentStep != @currentStep
-        if currentStep/3 == Math.floor(@currentStep/3)
-          if @uturn <= 0
-            @angle = @angle + (Math.random() * 50 - 25)
-          else
-            @uturn = @uturn - 10
-            if @uturn >= 110
-              @angle = @angle - 30
-
-      @currentStep = currentStep

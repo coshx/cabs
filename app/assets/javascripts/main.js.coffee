@@ -6,11 +6,12 @@ Map = Game.Map
 
 Game.Map.load()
 lyft = new Game.Objects.LyftCar()
-lyft.load()
-cab = new Game.Objects.UberCar()
-cab.angle = 150
 
-cab.load()
+cab = new Game.Objects.UberCar()
+#lyft.angle = 200
+
+cab.angle = 100
+lyft.angle = 200
 
 Game.objects = []
 Game.objects.push cab
@@ -20,8 +21,8 @@ $ ->
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     for object in Game.objects
-      x = object.pos[0] + Map.pos[0]
-      y = object.pos[1] + Map.pos[1]
+      x = object.pos[0] + Map.pos[0] + object.width/2
+      y = object.pos[1] + Map.pos[1] + object.height/2
       console.log "X ", e.clientX, x
       if e.clientX > x && e.clientX < x + object.width && e.clientY > y && e.clientY < y + object.height
         object.kill()
