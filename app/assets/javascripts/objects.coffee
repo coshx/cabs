@@ -9,7 +9,7 @@ Game.User =
       @score = @score + score
       @render()
   render: ->
-    $("#score").text(@score.toFixed(2))
+    $("#score").text("$" + @score.toFixed(2))
 
 Game.Map =
   topLeft: [40.758014, -74.013621]
@@ -127,7 +127,7 @@ class Game.Objects.Car
         unless object == @
           x = object.pos[0]
           y = object.pos[1]
-          a = 10
+          a = 0
           if @pos[0] > x - a && @pos[0] < x + object.width + a && @pos[1] > y - a && @pos[1] < y + object.height + a
             object.kill()
             @kill()
