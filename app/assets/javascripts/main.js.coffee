@@ -24,7 +24,7 @@ $ ->
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill(true)
         killed = killed + 1
-    Game.User.addScore(killed - 1)
+    Game.User.addScore((killed - 1) * 5)
   canvas = Game.canvas
   canvas.width = Game.Map.width
   canvas.height = Game.Map.height
