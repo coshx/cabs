@@ -27,7 +27,6 @@ $ ->
       if mouseX > x - a && mouseX < x + object.width + a && mouseY > y - a && mouseY < y + object.height + a
         object.kill(true)
         killed = killed + 1
-    Game.User.score += ((killed - 1) * 5)
   Game.canvas.addEventListener 'mousemove', (e) ->
     mouseX = e.layerX
     mouseY = e.layerY
@@ -92,7 +91,7 @@ Game.updateTimer = ->
     $("#timer").text(Game.timer)
   Game.lastTimer = Game.timer
 
-  maxCars = ((60 - Game.timer) / 8) + 3
+  maxCars = ((60 - Game.timer) / 10) + 3
   minCars = 2
   if Game.objects.filter(Game.alive).length < maxCars && Game.timer > 0
 
