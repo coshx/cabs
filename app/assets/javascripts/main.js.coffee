@@ -97,14 +97,16 @@ Game.updateTimer = ->
     if Game.timer == 10
       $('#prime-time').addClass('animated bounceIn')
 
+  maxCars = ((60 - Game.timer) / 6) + 4
+  minCars = ((60 - Game.timer) / 12) + 2
+  if Game.objects.filter(Game.alive).length < maxCars && Game.timer > 0
+    console.log Game.timer
+
+    if (Game.timer != Game.lastTimer) || Game.objects.filter(Game.alive).length < minCars
+      Game.spawnCar()
+
   Game.lastTimer = Game.timer
 
-  maxCars = ((60 - Game.timer) / 10) + 3
-  minCars = 2
-  if Game.objects.filter(Game.alive).length < maxCars && Game.timer > 0
-
-    if (Game.timer % 3 == 0) || Game.objects.filter(Game.alive).length < minCars
-      Game.spawnCar()
 
 Game.spawnCar = ->
   if Math.round(Math.random() * 100) > 95
