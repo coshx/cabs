@@ -111,7 +111,7 @@ class Game.Objects.Car
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
-    Game.User.subtractScore(@fare())
+    Game.User.subtractScore(@fare() / 2.0)
 
   currentSprite: ->
     if @alive
