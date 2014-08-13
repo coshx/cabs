@@ -39,9 +39,9 @@ Game.Map =
 
 class Game.Objects.Car
   toX: (coordinate) ->
-    Game.Map.width -  (coordinate - Game.Map.bottomRight[1]) * Game.Map.px * -1 - @width / 2
+    Game.Map.width -  (coordinate - Game.Map.bottomRight[1]) * Game.Map.px * -1
   toY: (coordinate) ->
-    Game.Map.height - (coordinate - Game.Map.bottomRight[0]) * Game.Map.py  - @height / 2
+    Game.Map.height - (coordinate - Game.Map.bottomRight[0]) * Game.Map.py 
   getPos: ->
     @pos[0] = @toX @route[0][1]
     @pos[1] = @toY @route[0][0]
@@ -139,7 +139,7 @@ class Game.Objects.Car
 
   move: (index) ->
     if @alive
-      lag = index * 100
+      lag = index * 70
       @distance = @distance + lag
       if @distance >= @currentDistance
         @pos = @distPos
@@ -167,13 +167,13 @@ class Game.Objects.Car
         @exploded = true if @explosionTime <= 0
       @move(index)
       ctx = Game.ctx
-      x = @pos[0] + @width /2 + Game.Map.pos[0]
-      y = @pos[1] + @height/2 + Game.Map.pos[1]
+      x = @pos[0] + Game.Map.pos[0]
+      y = @pos[1] + Game.Map.pos[1]
       ctx.save()
       ctx.translate(x, y)
       ctx.rotate(@angle * Math.PI / 180)
       if @sprite
-        ctx.drawImage(@currentSprite(), -@width/2, -@height/3*2)
+        ctx.drawImage(@currentSprite(), -@width/2, -@height/2)
       ctx.restore()
 
 class Game.Objects.BlackUberCar extends Game.Objects.Car
@@ -199,7 +199,7 @@ class Game.Objects.LyftCar extends Game.Objects.Car
   lowFareImage: Assets.Lyft.lowFareSprite
   midFareImage: Assets.Lyft.midFareSprite
   highFareImage: Assets.Lyft.highFareSprite
-  fareMultiplier: 2.0  
+  fareMultiplier: 2.0
 
   constructor: ->
     super
@@ -213,10 +213,10 @@ class Game.Objects.LyftCar extends Game.Objects.Car
 
       @move(index)
       ctx = Game.ctx
-      x = @pos[0] + @width /2 + Game.Map.pos[0]
-      y = @pos[1] + @height/2 + Game.Map.pos[1]
+      x = @pos[0] + Game.Map.pos[0]
+      y = @pos[1] + Game.Map.pos[1]
       if @sprite
-        ctx.drawImage(@currentSprite(), x, y)
+        ctx.drawImage(@currentSprite(), x + @width /2 , y + @height/2)
 
 
 
