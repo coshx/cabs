@@ -97,6 +97,20 @@ class Game.Objects.Car
       distance = @getDistance(@pixelsRoute[i], @pixelsRoute[i + 1])
       @lifeDistance += distance
       i++
+  drawRoute: ->
+    n = @route.length - 1
+    i = 0
+    ctx = Game.ctx
+    ctx.save()
+    ctx.beginPath()
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#33FF33';
+    while i < n
+      ctx.moveTo(@pixelsRoute[i][0], @pixelsRoute[i][1])
+      ctx.lineTo(@pixelsRoute[i + 1][0], @pixelsRoute[i + 1][1])
+      i++
+    ctx.stroke()
+    ctx.restore()
   getPixelsRoute: ->
     @pixelsRoute = []
     $.each @route, (i, r) =>
@@ -184,13 +198,13 @@ class Game.Objects.Car
             object.kill()
             @kill()
 
-
   render: (index) ->
     unless @exploded
       unless @alive
         @explosionTime = @explosionTime - 1
         @exploded = true if @explosionTime <= 0
       @move(index)
+      @drawRoute() if Game.selectedObject == @
       ctx = Game.ctx
       x = @pos[0] + Game.Map.pos[0]
       y = @pos[1] + Game.Map.pos[1]

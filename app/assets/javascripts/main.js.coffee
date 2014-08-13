@@ -25,6 +25,17 @@ $ ->
         object.kill(true)
         killed = killed + 1
     Game.User.addScore((killed - 1) * 5)
+  Game.canvas.addEventListener 'mousemove', (e) ->
+    console.log "meow"
+    selected = 0
+    for object in Game.objects.filter(Game.alive)
+      x = object.pos[0] + Map.pos[0]
+      y = object.pos[1] + Map.pos[1]
+      a = 10
+      if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
+        Game.selectedObject = object
+        seleted += 1
+    Game.selectedObject = null if selected == 0
   canvas = Game.canvas
   canvas.width = Game.Map.width
   canvas.height = Game.Map.height
