@@ -129,9 +129,7 @@ class Game.Objects.Car
 
   currentSprite: ->
     if @alive
-      if @complete
-        @deadSprite
-      else if @totalDistance < 4000
+      if @totalDistance < 4000
         @sprite
       else if @totalDistance < 8000
         @lowFareSprite
@@ -140,7 +138,10 @@ class Game.Objects.Car
       else
         @highFareSprite
     else
-      @deadSprite
+      if @complete
+        @deadSprite
+      else
+        @deadSprite
   load: ->
     image = new Image()
     image.src = @image
