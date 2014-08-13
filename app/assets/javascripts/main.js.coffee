@@ -55,6 +55,8 @@ $ ->
     Game.User.score = 0.0
     $("#positive-scores").fadeOut()
     $("#negative-scores").fadeOut()
+    $("#save-score").fadeIn()
+    $("score-board").fadeOut()
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
@@ -63,8 +65,9 @@ $ ->
 
   $("#save-score .button").click ->
     Game.User.saveScore $("#save-score input").val(), Game.User.score
-    $("#save-score .button").replaceWith("")
-    $("#save-score input").replaceWith("")
+    $("#save-score").fadeOut()
+    $("score-board").fadeIn()
+
 
 
 Game.render = (index) ->
