@@ -68,8 +68,6 @@ $ ->
     $("#save-score").fadeOut()
     $("#score-board").fadeIn()
 
-
-
 Game.render = (index) ->
   ctx = Game.ctx
   canvas = Game.canvas
