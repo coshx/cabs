@@ -17,21 +17,26 @@ $ ->
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     killed = 0
+    mouseX = e.layerX
+    mouseY = e.layerY
+    console.log e
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
       a = 10
-      if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
+      if mouseX > x - a && mouseX < x + object.width + a && mouseY > y - a && mouseY < y + object.height + a
         object.kill(true)
         killed = killed + 1
     Game.User.score += ((killed - 1) * 5)
   Game.canvas.addEventListener 'mousemove', (e) ->
+    mouseX = e.layerX
+    mouseY = e.layerY
     selected = 0
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
       a = 10
-      if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
+      if mouseX > x - a && mouseX < x + object.width + a && mouseY > y - a && mouseY < y + object.height + a
         Game.selectedObject = object
         selected += 1
     Game.selectedObject = null if selected == 0
