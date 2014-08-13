@@ -20,7 +20,6 @@ $ ->
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
-      console.log "X ", e.clientX, x
       a = 30
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill(true)
@@ -49,14 +48,24 @@ Game.render = (index) ->
     object.render(index)
 
 Game.lastTime = Date.now()
+Game.startTime = Date.now()
 
 Game.alive = (a) ->
   a.alive
+
+Game.updateTimer = ->
+  Game.timer = Math.round((Game.lastTime - Game.startTime) / 1000)
+  # not to update every 1/60 second
+  if Game.timer != Game.lastTimer
+    $("#timer").text(Game.timer)
+  Game.lastTimer = Game.timer
+
 
 #main loop
 Game.main = ->
   now = Date.now()
   dt = (now - Game.lastTime) / 1000.0
+  Game.updateTimer()
   Game.render(dt)
   Game.lastTime = now
   if Game.objects.filter(Game.alive).length < 5

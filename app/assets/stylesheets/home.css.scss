@@ -93,15 +93,45 @@ canvas {
 }
 .local-score-wrapper {
 	position: fixed;
-	left: 10px;
+	left: 50px;
 	top: 10px;
 	width: 100px;
-	height: 50px;
+	height: 70px;
 	z-index: 100;
 	content: '';
 	#local-score {
+		content: '';
 		font-family: 'Digital';
-		color: black;
+		color: rgb(23, 255, 97);
 		font-size: 120px;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 	}
+}
+#timer {
+	position: fixed;
+	width: 100px;
+	top: 10px;
+	left: 50%;
+	margin-left: -50px;
+	height: 80px;
+	font-family: 'Digital';
+	color: red;
+	font-size: 120px;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+#prime-time {
+	font-family: 'Arial';
+	font-size: 30px;
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	width: 270px;
+	height: 60px;
+	line-height: 60px;
+	color: #666666;
+	background: #EEEEEE;
+	border: 2px solid #666666;
+	border-radius: 2px;
+	text-align: center;
+	opacity: 0.9;
 }

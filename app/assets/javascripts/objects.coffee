@@ -12,9 +12,9 @@ Game.User =
   render: ->
     $("#score").text("$" + @score.toFixed(2))
   scoreFlash: (score) ->
-    $("#local-score").show(0)
+    $(".local-score-wrapper").stop().fadeIn(0)
     $("#local-score").text("$" + score.toFixed(2))
-    $("#local-score").fadeOut()
+    $(".local-score-wrapper").fadeOut(2000)
 
 Game.Map =
   topLeft: [40.758014, -74.013621]
