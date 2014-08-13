@@ -8,7 +8,7 @@ canvas {
 	margin: auto;
 	display: block;
 	border-radius: 20px;
-	border: 10px solid white;	
+	border: 10px solid yellow;	
 }
 #score {
 	font-family: 'Digital';
@@ -139,10 +139,13 @@ canvas {
 			font-weight: 700;
 			line-height: 23px;
 		}
-		table {
-			text-align: left;
-			margin-left: auto;
-			margin-right: auto;
+		.end-note{
+			table {
+				text-align: left;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
 		}
 	}
 }
