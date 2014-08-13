@@ -53,6 +53,8 @@ $ ->
 
   $("#game-over-button").click ->
     Game.User.score = 0.0
+    $("#positive-scores").fadeOut()
+    $("#negative-scores").fadeOut()
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
@@ -94,7 +96,7 @@ Game.updateTimer = ->
       $("#negative-scores").fadeIn()
     $("#game-over").fadeIn()
     Game.User.renderScoreBoard()
-    $("#game-over .scores").text(Math.abs(Math.round(Game.User.score)))
+    $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
     Game.timer = 0
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
