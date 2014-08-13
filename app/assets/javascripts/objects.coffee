@@ -55,7 +55,8 @@ Game.User =
     @renderScoreBoard()
   renderScoreBoard: ->
     scoreBoard = "<tr><td>Name</td><td>Score</td></tr>"
-    $.each @scores.reverse(), (i, s) =>
+    scores = @scores.reverse()
+    $.each scores, (i, s) =>
       scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score}</td></tr>"
     $("#score-board table").html(scoreBoard)
 
