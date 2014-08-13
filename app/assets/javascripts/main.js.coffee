@@ -59,7 +59,7 @@ $ ->
     $("#game-over").fadeOut()
 
   $("#save-score .button").click ->
-    Game.User.saveScore $("#save-score").val(), Game.User.score.toFixed(2)
+    Game.User.saveScore $("#save-score input").val(), Game.User.score.toFixed(2)
     $("#save-score .button").replaceWith("")
     $("#save-score input").replaceWith("")
 
