@@ -17,11 +17,11 @@ $ ->
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     killed = 0
-    for object in Game.objects.filter(alive)
+    for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
-      y = object.pos[1] + Map.pos[1] - object.height / 2
+      y = object.pos[1] + Map.pos[1]
       console.log "X ", e.clientX, x
-      a = 20
+      a = 30
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill(true)
         killed = killed + 1
@@ -33,8 +33,9 @@ $ ->
   ctx = Game.ctx
   ctx.fillStyle = "#000000"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
-  Game.main()
+  Game.render(0)
   $(".button").click ->
+    Game.main()
     $(".fade").fadeOut()
     Game.objects.push new Game.Objects.UberCar()
 
@@ -49,9 +50,8 @@ Game.render = (index) ->
 
 Game.lastTime = Date.now()
 
-alive = (a) ->
+Game.alive = (a) ->
   a.alive
-
 
 #main loop
 Game.main = ->
@@ -59,6 +59,8 @@ Game.main = ->
   dt = (now - Game.lastTime) / 1000.0
   Game.render(dt)
   Game.lastTime = now
-  if Game.objects.filter(alive).length < 5
+  if Game.objects.filter(Game.alive).length < 5
     Game.objects.push new Game.Objects.UberCar()
+  if Math.round(Math.random() * 1000) == 15
+    Game.objects.push new Game.Objects.LyftCar()
   window.setTimeout Game.main, 1000 / 60
