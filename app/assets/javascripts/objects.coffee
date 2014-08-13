@@ -36,8 +36,8 @@ Game.User =
     @synced = true
     UserScore = Parse.Object.extend("UserScore")
     query = new Parse.Query(UserScore)
-    query.ascending("score")
-    query.limit(10)
+    query.descending("score")
+    query.limit(9)
     query.find
       success: (results) =>
         @scores = []
@@ -56,7 +56,7 @@ Game.User =
   renderScoreBoard: ->
     scoreBoard = "<tr><td>Name</td><td>Score</td></tr>"
     $.each @scores, (i, s) =>
-      scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score}</td></tr>"
+      scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score.toFixed(2)}</td></tr>"
     $("#score-board table").html(scoreBoard)
 
 Game.Map =
