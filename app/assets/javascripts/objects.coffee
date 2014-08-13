@@ -230,7 +230,7 @@ class Game.Objects.BlackUberCar extends Game.Objects.Car
   lowFareImage: Assets.BlackUber.lowFareSprite
   midFareImage: Assets.BlackUber.midFareSprite
   highFareImage: Assets.BlackUber.highFareSprite
-  fareMultiplier: 1.4
+  fareMultiplier: 1.3
   constructor: ->
     super
 
