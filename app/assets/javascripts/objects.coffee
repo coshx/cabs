@@ -136,20 +136,26 @@ class Game.Objects.Car
 
   move: (index) ->
     if @alive
-      x = @pos[0]
-      y = @pos[1]
-
-      if (y < @width || x < @height || x > Game.canvas.width - @width|| y > Game.canvas.height - @height)&&(@uturn <= 0)
-        @makeUturn()
       lag = index * 100
-      x = Math.sin(@angle * Math.PI/180) * lag
-      y = Math.cos(@angle * Math.PI/180) * lag
-      @pos[0] = @pos[0] + x
-      @pos[1] = @pos[1] - y
-      @distance = @distance + index * 100
-      @totalDistance += @distance
+      @distance = @distance + lag
       if @distance >= @currentDistance
+        @pos = @distPos
         @getNextDestination()
+      else
+        x = Math.sin(@angle * Math.PI/180) * lag
+        y = Math.cos(@angle * Math.PI/180) * lag
+        @pos[0] = @pos[0] + x
+        @pos[1] = @pos[1] - y
+      @totalDistance += @distance
+      for object in Game.objects.filter(Game.alive)
+        unless object == @
+          x = object.pos[0]
+          y = object.pos[1]
+          a = 10
+          if @pos[0] > x - a && @pos[0] < x + object.width + a && @pos[1] > y - a && @pos[1] < y + object.height + a
+            object.kill()
+            @kill()
+
 
   render: (index) ->
     unless @exploded
