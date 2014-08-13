@@ -60,8 +60,8 @@ Game.User =
     $("#score-board table").html(scoreBoard)
 
 Game.Map =
-  topLeft: [40.758014, -74.013621]
-  bottomRight: [40.733368, -73.959291]
+  topLeft: [40.758014, -74.013221]
+  bottomRight: [40.733368, -73.958891]
   pos: [0, 0]
   image: Assets.Map.sprite
   width: 1251
