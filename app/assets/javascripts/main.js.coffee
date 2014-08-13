@@ -19,7 +19,6 @@ $ ->
     killed = 0
     mouseX = e.layerX
     mouseY = e.layerY
-    console.log e
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
@@ -100,14 +99,13 @@ Game.updateTimer = ->
     $("#timer").text(Game.timer)
     if Game.timer == 20
       $("#prime-time").fadeIn()
-      Game.Users.getScores() unless Game.User.synced
+      Game.User.getScores() unless Game.User.synced
     if Game.timer == 10
       $('#prime-time').addClass('animated bounceIn')
 
   maxCars = ((60 - Game.timer) / 6) + 4
   minCars = ((60 - Game.timer) / 12) + 2
   if Game.objects.filter(Game.alive).length < maxCars && Game.timer > 0
-    console.log Game.timer
 
     if (Game.timer != Game.lastTimer) || Game.objects.filter(Game.alive).length < minCars
       Game.spawnCar()
