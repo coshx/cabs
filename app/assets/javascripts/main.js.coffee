@@ -52,12 +52,18 @@ $ ->
     $("#welcome-message").fadeOut()
     Game.objects.push new Game.Objects.BlackUberCar()
 
-  $("#game-over .button").click ->
+  $("#game-over-button").click ->
     Game.User.score = 0.0
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
     $("#game-over").fadeOut()
+
+  $("#save-score .button").click ->
+    Game.User.saveScore $("#save-score").val(), Game.User.score
+    $("#save-score .button").replaceWith("")
+    $("#save-score input").replaceWith("")
+
 
 Game.render = (index) ->
   ctx = Game.ctx
@@ -94,6 +100,7 @@ Game.updateTimer = ->
     $("#timer").text(Game.timer)
     if Game.timer == 20
       $("#prime-time").fadeIn()
+      Game.Users.getScores() unless Game.User.synced
     if Game.timer == 10
       $('#prime-time').addClass('animated bounceIn')
 
