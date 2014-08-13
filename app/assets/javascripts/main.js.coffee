@@ -50,6 +50,8 @@ $ ->
     Game.main()
     $("#welcome-message").fadeOut()
     Game.objects.push new Game.Objects.BlackUberCar()
+    Game.objects.push new Game.Objects.XUberCar()
+
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
 
@@ -113,7 +115,7 @@ Game.updateTimer = ->
 
   maxCars = ((60 - Game.timer) / 6) + 4
   minCars = ((60 - Game.timer) / 12) + 2
-  if Game.objects.filter(Game.alive).length < maxCars && Game.timer > 0
+  if Game.objects.filter(Game.alive).length < maxCars && 0 < Game.timer < 56
 
     if (Game.timer != Game.lastTimer) || Game.objects.filter(Game.alive).length < minCars
       Game.spawnCar()
