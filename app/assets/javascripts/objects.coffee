@@ -42,7 +42,7 @@ Game.User =
       success: (results) =>
         @scores = []
         $.each results, (i, s) =>
-          @scores.push
+          @scores.unshift
             name: s.attributes.name
             score: s.attributes.score
 
@@ -55,8 +55,7 @@ Game.User =
     @renderScoreBoard()
   renderScoreBoard: ->
     scoreBoard = "<tr><td>Name</td><td>Score</td></tr>"
-    scores = @scores.reverse()
-    $.each scores, (i, s) =>
+    $.each @scores, (i, s) =>
       scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score}</td></tr>"
     $("#score-board table").html(scoreBoard)
 
