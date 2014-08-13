@@ -42,7 +42,7 @@ Game.User =
       success: (results) =>
         @scores = []
         $.each results, (i, s) =>
-          @scores.unshift
+          @scores.push
             name: s.attributes.name
             score: s.attributes.score
 
