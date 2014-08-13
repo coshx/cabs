@@ -62,6 +62,10 @@ class Game.Objects.Car
       @kill()
   loaded: false
   deadImage:  Assets.BlackUber.explodeSprite
+  lowFareImage: Assets.BlackUber.lowFareSprite
+  midFareImage: Assets.BlackUber.midFareSprite
+  highFareImage: Assets.BlackUber.highFareSprite
+
   uturn: 0
   alive: true
   distance: 0
@@ -86,13 +90,33 @@ class Game.Objects.Car
     Game.User.addScore(@fare()) if scores
   currentSprite: ->
     if @alive
-      @sprite
+      if @totalDistance < 4000
+        @sprite
+      else if @totalDistance < 8000
+        @lowFareSprite
+      else if @totalDistance < 16000
+        @midFareSprite
+      else
+        @highFareSprite
     else
       @deadSprite
   load: ->
     image = new Image()
     image.src = @image
     @sprite = image
+
+    image = new Image()
+    image.src = @lowFareImage
+    @lowFareSprite = image
+
+    image = new Image()
+    image.src = @midFareImage
+    @midFareSprite = image
+
+    image = new Image()
+    image.src = @highFareImage
+    @highFareSprite = image
+
     image = new Image()
     image.src = @deadImage
     @deadSprite = image
