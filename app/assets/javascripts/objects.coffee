@@ -230,7 +230,7 @@ class Game.Objects.BlackUberCar extends Game.Objects.Car
   lowFareImage: Assets.BlackUber.lowFareSprite
   midFareImage: Assets.BlackUber.midFareSprite
   highFareImage: Assets.BlackUber.highFareSprite
-  fareMultiplier: 1.25
+  fareMultiplier: 1.4
   constructor: ->
     super
 
@@ -264,9 +264,11 @@ class Game.Objects.LyftCar extends Game.Objects.Car
       ctx = Game.ctx
       x = @pos[0] + Game.Map.pos[0]
       y = @pos[1] + Game.Map.pos[1]
-      if @sprite
-        ctx.drawImage(@currentSprite(), x + @width / 2 , y + @height / 2)
-
-
-
-
+      if @complete
+        ctx.drawImage(@currentSprite(), x-@width/2 +20, y-@height/2 - 60)
+      else
+        ctx.save()
+        ctx.translate(x, y)
+        if @sprite
+          ctx.drawImage(@currentSprite(), -@width/2, -@height/2)
+        ctx.restore()

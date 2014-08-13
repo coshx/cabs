@@ -82,8 +82,12 @@ Game.updateTimer = ->
   if Game.timer <= 0
     for object in Game.objects.filter(Game.alive)
       object.kill()
+    if Game.User.score > 0
+      $("#positive-scores").fadeIn()
+    else
+      $("#negative-scores").fadeIn()
     $("#game-over").fadeIn()
-    $("#game-over .scores").text(Math.round(Game.User.score))
+    $("#game-over .scores").text(Math.abs(Math.round(Game.User.score)))
     Game.timer = 0
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
@@ -103,7 +107,7 @@ Game.updateTimer = ->
       Game.spawnCar()
 
 Game.spawnCar = ->
-  if Math.round(Math.random() * 100) > 98
+  if Math.round(Math.random() * 100) > 95
     Game.objects.push new Game.Objects.LyftCar()
   else if Math.round(Math.random() * 100) > 60
     Game.objects.push new Game.Objects.BlackUberCar()
