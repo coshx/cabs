@@ -40,7 +40,7 @@ $ ->
 
   $("#game-over .button").click ->
     Game.User.score = 0.0
-    $("#local-score").text("$0.00")
+    $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
     $("#game-over").fadeOut()
