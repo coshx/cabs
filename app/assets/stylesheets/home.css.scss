@@ -1,10 +1,12 @@
 body {
-	background: rgb(247, 227, 0);
+    background-image: image-url('checker.png');
+    background-repeat: repeat;
 }
 canvas {
 	cursor: pointer;
 	z-index: 1;
-	margin: auto;	
+	margin: auto;
+	display: block;	
 }
 #score {
 	font-family: 'Digital';
@@ -26,6 +28,8 @@ canvas {
 	padding: 7px;
 	display: inline-block;
 	border-radius: 5px;
+	opacity: 0.8;
+    filter: alpha(opacity=80);
 }
 .inside-box {
 	height: auto;
@@ -43,7 +47,7 @@ canvas {
 	text-align: center;
 }
 .fade {
-	background: rgba(0,0,0,0.3);
+	background: rgba(0,0,0,0.4);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -53,8 +57,7 @@ canvas {
 	.message {
 		position: fixed;
 		background: white;
-		border-radius: 3px;
-		border: 2px solid rgba(0,0,0,0.7);
+		border-radius: 6px;
 		width: 500px;
 		height: 250;
 		top: 50%;
@@ -62,15 +65,29 @@ canvas {
 		margin-left: -250px;
 		margin-top: -125px;
 		padding: 20px;
+		font-family: 'Arial';
+		border-radius: 5px;
+		text-align: center;
 		.button {
-			background: rgb(247, 227, 0);
-			border-radius: 3px;
-			padding: 5px;
+			background: #710000;
+			border-radius: 4px;
+			padding-top: 15px;
+			padding-bottom: 15px;
+			padding-right: 20px;
+			padding-left: 20px;
 			cursor: pointer;
 			text-align: center;
+			opacity: 2;
+			font-weight: bold;
+			color: white;
+			display: inline-block;
 			&:hover {
 				opacity: 0.8;
 			}
+		}
+		h1, h2 {
+			margin: 2px;
+			text-align: center;
 		}
 	}
 }
