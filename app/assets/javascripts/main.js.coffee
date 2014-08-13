@@ -56,7 +56,7 @@ $ ->
     $("#positive-scores").fadeOut()
     $("#negative-scores").fadeOut()
     $("#save-score").fadeIn()
-    $("score-board").fadeOut()
+    $("#score-board").fadeOut()
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
