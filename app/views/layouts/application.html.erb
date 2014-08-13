@@ -2,10 +2,12 @@
 <html>
 <head>
   <title>Cabs</title>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+
   <script>
     Routes = <%= read_routes_list.to_json %>;
+	Parse.initialize("lorucXW5uj0ukpI0Ju7ITWxiNty14PQOJD6ZEYzp", "N6b4cNrVq1zNnpnhJFqXaDUzThXymCPvBRwKCAq4");
   </script>
-
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>

@@ -23,6 +23,24 @@ Game.User =
     $("#local-score").text("$" + score.toFixed(2))
     $("#local-score").css("color", color)
     $(".local-score-wrapper").fadeOut(2000)
+  saveScore: ->
+    UserScore = Parse.Object.extend("UserScore")
+    userScore = new UserScore()
+    userScore.save(
+      name: "bar"
+      score: 132
+    ).then (object) ->
+      alert("saved")
+  getScores: ->
+    UserScore = Parse.Object.extend("UserScore")
+    query = new Parse.Query(UserScore)
+    query.ascending("score")
+    query.limit(10)
+    query.find
+      success: (results) ->
+        alert("Successfully retrieved " + results.length + " scores.");
+      error: (error) ->
+        alert("Error: " + error.code + " " + error.message);
 
 Game.Map =
   topLeft: [40.758014, -74.013621]
