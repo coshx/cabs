@@ -24,7 +24,7 @@ $ ->
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
       a = 10
-      if mouseX > x - a && mouseX < x + object.width + a && mouseY > y - a && mouseY < y + object.height + a
+      if mouseX > x - a - object.width / 2 && mouseX < x + object.width / 2 + a && mouseY > y - a -  object.height / 2 && mouseY < y + object.height / 2 + a
         object.kill(true)
         killed = killed + 1
   Game.canvas.addEventListener 'mousemove', (e) ->
