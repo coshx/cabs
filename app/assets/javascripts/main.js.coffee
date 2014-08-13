@@ -63,8 +63,9 @@ $ ->
 
   $("#save-score .button").click ->
     Game.User.saveScore $("#save-score input").val(), Game.User.score
-    $("#save-score .button").replaceWith("")
-    $("#save-score input").replaceWith("")
+    $("#save-score").fadeOut()
+    $("score-board").fadeIn()
+
 
 
 Game.render = (index) ->
