@@ -67,9 +67,7 @@ class Game.Objects.Car
       @kill()
   loaded: false
   deadImage:  Assets.BlackUber.explodeSprite
-  lowFareImage: Assets.BlackUber.lowFareSprite
-  midFareImage: Assets.BlackUber.midFareSprite
-  highFareImage: Assets.BlackUber.highFareSprite
+
 
   uturn: 0
   alive: true
@@ -137,7 +135,7 @@ class Game.Objects.Car
 
   fare: ->
     base = 2.0
-    (@totalDistance / 1000) + base
+    ((@totalDistance / 1000) + base) * @fareMultiplier
 
   move: (index) ->
     if @alive
@@ -178,13 +176,31 @@ class Game.Objects.Car
         ctx.drawImage(@currentSprite(), -@width/2, -@height/3*2)
       ctx.restore()
 
-class Game.Objects.UberCar extends Game.Objects.Car
+class Game.Objects.BlackUberCar extends Game.Objects.Car
   image: Assets.BlackUber.sprite
+  lowFareImage: Assets.BlackUber.lowFareSprite
+  midFareImage: Assets.BlackUber.midFareSprite
+  highFareImage: Assets.BlackUber.highFareSprite
+  fareMultiplier: 1.25
+  constructor: ->
+    super
+
+class Game.Objects.XUberCar extends Game.Objects.Car
+  image: Assets.XUber.sprite
+  lowFareImage: Assets.XUber.lowFareSprite
+  midFareImage: Assets.XUber.midFareSprite
+  highFareImage: Assets.XUber.highFareSprite
+  fareMultiplier: 1.0
   constructor: ->
     super
 
 class Game.Objects.LyftCar extends Game.Objects.Car
   image: Assets.Lyft.sprite
+  lowFareImage: Assets.Lyft.lowFareSprite
+  midFareImage: Assets.Lyft.midFareSprite
+  highFareImage: Assets.Lyft.highFareSprite
+  fareMultiplier: 2.0  
+
   constructor: ->
     super
     @width = 68
