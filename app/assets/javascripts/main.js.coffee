@@ -26,7 +26,6 @@ $ ->
         killed = killed + 1
     Game.User.addScore((killed - 1) * 5)
   Game.canvas.addEventListener 'mousemove', (e) ->
-    console.log "meow"
     selected = 0
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
@@ -34,7 +33,7 @@ $ ->
       a = 10
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         Game.selectedObject = object
-        seleted += 1
+        selected += 1
     Game.selectedObject = null if selected == 0
   canvas = Game.canvas
   canvas.width = Game.Map.width
@@ -62,6 +61,7 @@ Game.render = (index) ->
   ctx.fillStyle = '#345678'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.Map.render()
+  Game.selectedObject.drawRoute() if Game.selectedObject
   for object in Game.objects
     object.render(index)
 

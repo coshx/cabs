@@ -204,7 +204,6 @@ class Game.Objects.Car
         @explosionTime = @explosionTime - 1
         @exploded = true if @explosionTime <= 0
       @move(index)
-      @drawRoute() if Game.selectedObject == @
       ctx = Game.ctx
       x = @pos[0] + Game.Map.pos[0]
       y = @pos[1] + Game.Map.pos[1]
