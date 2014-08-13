@@ -71,7 +71,7 @@ Game.updateTimer = ->
     $("#timer").text(Game.timer)
   Game.lastTimer = Game.timer
 
-  maxCars = (Game.timer / 8) + 3
+  maxCars = ((60 - Game.timer) / 8) + 3
   minCars = 2
   if Game.objects.filter(Game.alive).length < maxCars && Game.timer >= 0
 
