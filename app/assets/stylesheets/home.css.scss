@@ -39,6 +39,11 @@ canvas {
 	min-width: 216px;
 	border-radius: 5px;
 }
+
+.rules {
+  text-align: left;
+}
+
 .outside-box p{
 	color: white;
 	font-family: 'Arial';
@@ -139,6 +144,11 @@ canvas {
 		}
 	}
 }
+
+.scoreboard-header {
+  font-weight: bold;
+}
+
 .local-score-wrapper {
 	position: fixed;
 	left: 50px;
