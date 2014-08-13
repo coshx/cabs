@@ -10,7 +10,7 @@
 %canvas#canvas
 #prime-time
   PRIME TIME
-.fade{style: 'display: none'}
+.fade#welcome-message{style: 'display: none'}
   .message
     %h1
       Welcome to Lyft-ber!
@@ -27,4 +27,14 @@
       .middle
         START GAME
       .after
+.fade#game-over{style: 'display: none'}
+  .message
+    %h1
+      Game Over!
+    %h2
+      Congruatulations, you've earned $<span class="scores"></span> by robbing lyft-ber drivers.
+    %p
+      Text
+    .button
+      Start Over
 #timer
