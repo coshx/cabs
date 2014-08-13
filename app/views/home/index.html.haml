@@ -13,11 +13,20 @@
 .fade#welcome-message{style: 'display: none'}
   .message
     %h1
-      Welcome to Lyft-ber!
+      Welcome to Lyf-ber!
     %h2
       A game for New York City cab drivers
     %p
-      The idea of this game is to provide New York City cab drivers a way of releasing their emotions towards some new companies trying to disrupt the market.
+      This game provides New York City cab drivers a way of releasing their emotions towards some new companies that are disrupting the market.
+    %ol{style: "text-align:left"}
+      %li
+        Collect as much cab fare as you can in 60 sec.
+      %li
+        Lyf's will give you the most money, then Bers, then BerXs.
+      %li
+        The further a car has gone, the higher the fare will be.
+      %li
+        Watch out! You'll lose money if a passanger is dropped off and you haven't crushed the car!
     .button
       .before
         .tracer
@@ -38,8 +47,23 @@
         Aw man, you lost $<span class="scores"></span> while playing lyf-ber.
         %br
         Maybe you aren't cut out to be a cab driver...?
-    %p
-      Score Board
+    .end-note#save-score
+      %p
+        Save your score?
+      %input{placeholder: "nickname"}
+    .end-note#score-board
+      %table
+        %tbody
+          %tr{style: 'font-weight: bold'}
+            %td Name
+            %td Score
+          %tr
+            %td Neeharika
+            %td $511.11
+          %tr
+            %td Josh
+            %td $300.00   
+    %br
     .button
       .before
         .tracer

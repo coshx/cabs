@@ -62,9 +62,10 @@ canvas {
 		top: 50%;
 		left: 50%;
 		margin-left: -250px;
-		margin-top: -125px;
+		margin-top: -185px;
 		padding: 20px;
-		font-family: 'Open Sans light', sans-serif;
+		font-family: 'Titillium Web', sans-serif;
+		font-weight: bold 700;
 		border-radius: 15px;
 		text-align: center;
 		.button {
@@ -78,9 +79,9 @@ canvas {
 			font-weight: bold;
 			color: white;
 			display: inline-block;
-			min-width: 195px;
+			min-width: 203px;
 			font-family: 'Open Sans light', sans-serif;
-			font-weight: 300;
+			font-weight: 700;
 			letter-spacing: 0.2px;
 			&:hover {
 				opacity: 0.8;
@@ -119,8 +120,22 @@ canvas {
 			}
 		}
 		h1, h2 {
-			margin: 2px;
+			margin: 1px;
 			text-align: center;
+			line-height: 30px;
+		}
+		p{
+			line-height: 20px;
+		}
+		ol {
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 23px;
+		}
+		table {
+			text-align: left;
+			margin-left: auto;
+			margin-right: auto;
 		}
 	}
 }
