@@ -78,7 +78,7 @@ Game.render = (index) ->
 Game.alive = (a) ->
   a.alive
 
-Game.totalTime = 1
+Game.totalTime = 60
 Game.lastTime = Date.now()
 Game.startTime = Date.now()
 
