@@ -104,7 +104,7 @@ Game.updateTimer = ->
       Game.spawnCar()
 
 Game.spawnCar = ->
-  if Math.round(Math.random() * 100) > 98
+  if Math.round(Math.random() * 100) > 95
     Game.objects.push new Game.Objects.LyftCar()
   else if Math.round(Math.random() * 100) > 60
     Game.objects.push new Game.Objects.BlackUberCar()
