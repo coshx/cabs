@@ -73,6 +73,7 @@ class Game.Objects.Car
       @arrive()
   loaded: false
   deadImage:  Assets.BlackUber.explodeSprite
+  completeImage: Assets.completeSprite
 
 
   uturn: 0
@@ -141,7 +142,7 @@ class Game.Objects.Car
         @highFareSprite
     else
       if @complete
-        @deadSprite
+        @completeFlag
       else
         @deadSprite
   load: ->
@@ -165,6 +166,10 @@ class Game.Objects.Car
     image.src = @deadImage
     @deadSprite = image
 
+    image = new Image()
+    image.src = @completeImage
+    @completeFlag = image
+
   getDistance: (point1, point2) ->
     xs = point2[0] - point1[0]
     xs = xs * xs
@@ -175,7 +180,7 @@ class Game.Objects.Car
     Math.sqrt( xs + ys )
 
   fare: ->
-    base = (@totalDistance / 800) - 3.0
+    base = (@totalDistance / 600) - 3.0
     base = 0 if base < 0
     ((@totalDistance / 1000) + base) * @fareMultiplier
 
@@ -210,12 +215,15 @@ class Game.Objects.Car
       ctx = Game.ctx
       x = @pos[0] + Game.Map.pos[0]
       y = @pos[1] + Game.Map.pos[1]
-      ctx.save()
-      ctx.translate(x, y)
-      ctx.rotate(@angle * Math.PI / 180)
-      if @sprite
-        ctx.drawImage(@currentSprite(), -@width/2, -@height/2)
-      ctx.restore()
+      if @complete
+        ctx.drawImage(@currentSprite(), x-@width/2 +20, y-@height/2 - 60)
+      else
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.rotate(@angle * Math.PI / 180)
+        if @sprite
+          ctx.drawImage(@currentSprite(), -@width/2, -@height/2)
+        ctx.restore()
 
 class Game.Objects.BlackUberCar extends Game.Objects.Car
   image: Assets.BlackUber.sprite
