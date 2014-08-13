@@ -6,7 +6,7 @@ window.Routes ||= []
 Map = Game.Map
 
 Game.randomRoute = ->
-  n = Routes.length
+  n = Routes.length - 1
   Routes[Math.round(Math.random() * n)]
 
 Game.Map.load()
@@ -24,7 +24,7 @@ $ ->
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill(true)
         killed = killed + 1
-    Game.User.addScore(killed - 1)
+    Game.User.addScore((killed - 1) * 5)
   canvas = Game.canvas
   canvas.width = Game.Map.width
   canvas.height = Game.Map.height
@@ -36,7 +36,7 @@ $ ->
   $(".button").click ->
     Game.main()
     $(".fade").fadeOut()
-    Game.objects.push new Game.Objects.UberCar()
+    Game.objects.push new Game.Objects.BlackUberCar()
 
 Game.render = (index) ->
   ctx = Game.ctx
@@ -68,8 +68,13 @@ Game.main = ->
   Game.updateTimer()
   Game.render(dt)
   Game.lastTime = now
+
   if Game.objects.filter(Game.alive).length < 5
-    Game.objects.push new Game.Objects.UberCar()
-  if Math.round(Math.random() * 1000) == 15
-    Game.objects.push new Game.Objects.LyftCar()
+    if Math.round(Math.random() * 100) > 98
+      Game.objects.push new Game.Objects.LyftCar()
+    else if Math.round(Math.random() * 100) > 60
+      Game.objects.push new Game.Objects.BlackUberCar()
+    else
+      Game.objects.push new Game.Objects.XUberCar()
+
   window.setTimeout Game.main, 1000 / 60

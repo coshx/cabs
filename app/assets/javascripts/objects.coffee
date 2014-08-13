@@ -7,13 +7,19 @@ Game.User =
   addScore: (score) ->
     if score > 0.0
       @score = @score + score
-      @scoreFlash(score)
+      @scoreFlash(score, "#33FF99")
+      @render()
+  subtractScore: (score) ->
+    if score > 0.0
+      @score = @score - score
+      @scoreFlash(score, "#B00000")
       @render()
   render: ->
     $("#score").text("$" + @score.toFixed(2))
-  scoreFlash: (score) ->
+  scoreFlash: (score, color) ->
     $(".local-score-wrapper").stop().fadeIn(0)
     $("#local-score").text("$" + score.toFixed(2))
+    $("#local-score").css("color", color)
     $(".local-score-wrapper").fadeOut(2000)
 
 Game.Map =
@@ -39,9 +45,9 @@ Game.Map =
 
 class Game.Objects.Car
   toX: (coordinate) ->
-    Game.Map.width -  (coordinate - Game.Map.bottomRight[1]) * Game.Map.px * -1 - @width / 2
+    Game.Map.width -  (coordinate - Game.Map.bottomRight[1]) * Game.Map.px * -1
   toY: (coordinate) ->
-    Game.Map.height - (coordinate - Game.Map.bottomRight[0]) * Game.Map.py  - @height / 2
+    Game.Map.height - (coordinate - Game.Map.bottomRight[0]) * Game.Map.py 
   getPos: ->
     @pos[0] = @toX @route[0][1]
     @pos[1] = @toY @route[0][0]
@@ -64,12 +70,10 @@ class Game.Objects.Car
       @angle = @angle + 90
       @currentDistance = @getDistance(@pos, @distPos)
     else
-      @kill()
+      @arrive()
   loaded: false
   deadImage:  Assets.BlackUber.explodeSprite
-  lowFareImage: Assets.BlackUber.lowFareSprite
-  midFareImage: Assets.BlackUber.midFareSprite
-  highFareImage: Assets.BlackUber.highFareSprite
+
 
   uturn: 0
   alive: true
@@ -93,9 +97,19 @@ class Game.Objects.Car
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
     Game.User.addScore(@fare()) if scores
+  arrive: () ->
+    console.log("arriving")
+    @complete = true
+    @alive = false
+    Game.objects.splice(Game.objects.indexOf(@), 1)
+    Game.objects.unshift(@)
+    Game.User.subtractScore(@fare())
+
   currentSprite: ->
     if @alive
-      if @totalDistance < 4000
+      if @complete
+        @deadSprite
+      else if @totalDistance < 4000
         @sprite
       else if @totalDistance < 8000
         @lowFareSprite
@@ -137,11 +151,11 @@ class Game.Objects.Car
 
   fare: ->
     base = 2.0
-    (@totalDistance / 1000) + base
+    ((@totalDistance / 1000) + base) * @fareMultiplier
 
   move: (index) ->
     if @alive
-      lag = index * 100
+      lag = index * 70
       @distance = @distance + lag
       if @distance >= @currentDistance
         @pos = @distPos
@@ -157,7 +171,7 @@ class Game.Objects.Car
           x = object.pos[0]
           y = object.pos[1]
           a = 0
-          if @pos[0] > x - a && @pos[0] < x + object.width + a && @pos[1] > y - a && @pos[1] < y + object.height + a
+          if @pos[0] > x - a && @pos[0] < x + (0.2 * object.width) + a && @pos[1] > y - a && @pos[1] < y + (0.6 * object.height) + a
             object.kill()
             @kill()
 
@@ -169,22 +183,40 @@ class Game.Objects.Car
         @exploded = true if @explosionTime <= 0
       @move(index)
       ctx = Game.ctx
-      x = @pos[0] + @width /2 + Game.Map.pos[0]
-      y = @pos[1] + @height/2 + Game.Map.pos[1]
+      x = @pos[0] + Game.Map.pos[0]
+      y = @pos[1] + Game.Map.pos[1]
       ctx.save()
       ctx.translate(x, y)
       ctx.rotate(@angle * Math.PI / 180)
       if @sprite
-        ctx.drawImage(@currentSprite(), -@width/2, -@height/3*2)
+        ctx.drawImage(@currentSprite(), -@width/2, -@height/2)
       ctx.restore()
 
-class Game.Objects.UberCar extends Game.Objects.Car
+class Game.Objects.BlackUberCar extends Game.Objects.Car
   image: Assets.BlackUber.sprite
+  lowFareImage: Assets.BlackUber.lowFareSprite
+  midFareImage: Assets.BlackUber.midFareSprite
+  highFareImage: Assets.BlackUber.highFareSprite
+  fareMultiplier: 1.25
+  constructor: ->
+    super
+
+class Game.Objects.XUberCar extends Game.Objects.Car
+  image: Assets.XUber.sprite
+  lowFareImage: Assets.XUber.lowFareSprite
+  midFareImage: Assets.XUber.midFareSprite
+  highFareImage: Assets.XUber.highFareSprite
+  fareMultiplier: 1.0
   constructor: ->
     super
 
 class Game.Objects.LyftCar extends Game.Objects.Car
   image: Assets.Lyft.sprite
+  lowFareImage: Assets.Lyft.lowFareSprite
+  midFareImage: Assets.Lyft.midFareSprite
+  highFareImage: Assets.Lyft.highFareSprite
+  fareMultiplier: 2.0
+
   constructor: ->
     super
     @width = 68
@@ -197,10 +229,10 @@ class Game.Objects.LyftCar extends Game.Objects.Car
 
       @move(index)
       ctx = Game.ctx
-      x = @pos[0] + @width /2 + Game.Map.pos[0]
-      y = @pos[1] + @height/2 + Game.Map.pos[1]
+      x = @pos[0] + Game.Map.pos[0]
+      y = @pos[1] + Game.Map.pos[1]
       if @sprite
-        ctx.drawImage(@currentSprite(), x, y)
+        ctx.drawImage(@currentSprite(), x + @width / 2 , y + @height / 2)
 
 
 
