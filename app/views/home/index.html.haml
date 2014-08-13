@@ -19,13 +19,20 @@
     %p
       The idea of this game is to provide New York City cab drivers a way of releasing their emotions towards some new companies trying to disrupt the market.
     .button
-      Start Game
+      .before
+        .tracer
+        %strong  1
+        %br
+        MIN
+      .middle
+        START GAME
+      .after
 .fade#game-over{style: 'display: none'}
   .message
     %h1
-      Game Over and Congratulations!
+      Game Over!
     %h2
-      You have earned $<span class="scores"></span> by robbing lyft-ber drivers.
+      Congruatulations, you've earned $<span class="scores"></span> by robbing lyft-ber drivers.
     %p
       Text
     .button

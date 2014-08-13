@@ -11,7 +11,7 @@ Game.User =
       @render()
   subtractScore: (score) ->
     if score > 0.0
-      @score = @score - score
+      @score = @score - (score / 2)
       @scoreFlash(score, "#B00000")
       @render()
   render: ->
@@ -107,7 +107,6 @@ class Game.Objects.Car
     Game.objects.unshift(@)
     Game.User.addScore(@fare()) if scores
   arrive: () ->
-    console.log("arriving")
     @complete = true
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
@@ -159,7 +158,8 @@ class Game.Objects.Car
     Math.sqrt( xs + ys )
 
   fare: ->
-    base = 2.0
+    base = (@totalDistance / 800) - 3.0
+    base = 0 if base < 0
     ((@totalDistance / 1000) + base) * @fareMultiplier
 
   move: (index) ->

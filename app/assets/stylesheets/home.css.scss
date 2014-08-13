@@ -57,7 +57,6 @@ canvas {
 	.message {
 		position: fixed;
 		background: white;
-		border-radius: 6px;
 		width: 500px;
 		height: 250;
 		top: 50%;
@@ -65,24 +64,58 @@ canvas {
 		margin-left: -250px;
 		margin-top: -125px;
 		padding: 20px;
-		font-family: 'Arial';
-		border-radius: 5px;
+		font-family: 'Open Sans light', sans-serif;
+		border-radius: 15px;
 		text-align: center;
 		.button {
-			background: #710000;
-			border-radius: 4px;
-			padding-top: 15px;
-			padding-bottom: 15px;
-			padding-right: 20px;
-			padding-left: 20px;
+			background: #000000;
+			border-radius: 24px;
+			padding-right: 3px;
+			padding-left: 3px;
 			cursor: pointer;
 			text-align: center;
 			opacity: 2;
 			font-weight: bold;
 			color: white;
 			display: inline-block;
+			min-width: 195px;
+			font-family: 'Open Sans light', sans-serif;
+			font-weight: 300;
+			letter-spacing: 0.2px;
 			&:hover {
 				opacity: 0.8;
+			}
+			.before{
+				background: image-url('button_sprite.png') 0 -1527px no-repeat;
+				height: 30px;
+				width: 30px;
+				position: absolute;
+				margin: 5px;
+				font-size: 8px;
+				float: left;
+			}
+			.middle{
+				display: inline-block;
+				padding-top: 11px;
+				padding-bottom: 11px;
+				padding-left: 12px;
+				padding-right: 8px;
+			}
+			.tracer{
+				font-size: 10px;
+				line-height: 10px;
+				margin-top: 5px;
+			}
+			.after{
+				display: inline-block;
+				background: image-url('button_sprite.png') 0 -1467px no-repeat;
+				height: 30px;
+				width: 30px;
+				margin: 5px;
+				font-size: 8px;
+				line-height: 10px;
+				position: absolute;
+				float: right;
 			}
 		}
 		h1, h2 {
