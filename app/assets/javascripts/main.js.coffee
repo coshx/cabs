@@ -67,6 +67,8 @@ $ ->
     Game.startTime = Date.now()
     $("#game-over").fadeOut()
     Game.User.synced = false
+    Game.objects.push new Game.Objects.BlackUberCar()
+    Game.objects.push new Game.Objects.XUberCar()
 
   $("#save-score .button").click ->
     Game.User.saveScore $("#save-score input").val(), Game.User.score
