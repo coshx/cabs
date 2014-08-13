@@ -50,6 +50,9 @@ $ ->
     Game.main()
     $("#welcome-message").fadeOut()
     Game.objects.push new Game.Objects.BlackUberCar()
+    Game.lastTime = Date.now()
+    Game.startTime = Date.now()
+
 
   $("#game-over-button").click ->
     Game.User.score = 0.0
