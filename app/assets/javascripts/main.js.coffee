@@ -40,7 +40,6 @@ $ ->
         Game.selectedObject = object
         selected += 1
     Game.selectedObject = null if selected == 0
-    
   canvas = Game.canvas
   canvas.width = Game.Map.width
   canvas.height = Game.Map.height
@@ -90,6 +89,8 @@ Game.updateTimer = ->
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
     $("#timer").text(Game.timer)
+    if Game.timer == 20 
+      $("#prime-time").fadeIn()
   Game.lastTimer = Game.timer
 
   maxCars = ((60 - Game.timer) / 8) + 3

@@ -18,6 +18,8 @@ Game.User =
     $("#score").text("$" + @score.toFixed(2))
   scoreFlash: (score, color) ->
     $(".local-score-wrapper").stop().fadeIn(0)
+    $('#local-score').removeClass('animated bounceIn')
+    $('#local-score').addClass('animated bounceIn')
     $("#local-score").text("$" + score.toFixed(2))
     $("#local-score").css("color", color)
     $(".local-score-wrapper").fadeOut(2000)
