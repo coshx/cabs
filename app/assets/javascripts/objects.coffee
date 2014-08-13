@@ -56,9 +56,7 @@ class Game.Objects.Car
     @currentDestination = @currentDestination + 1
     if @route[@currentDestination]
       @distCoordinates = @route[@currentDestination]
-      @distPos = []
-      @distPos[1] = @toY @distCoordinates[0]
-      @distPos[0] = @toX @distCoordinates[1]
+      @distPos = @pixelsRoute[@currentDestination]
       ex = @distPos[0]
       ey = @distPos[1]
       cx = @pos[0]
@@ -81,6 +79,8 @@ class Game.Objects.Car
   totalDistance: 0
   constructor: ->
     @route = Game.randomRoute()
+    @getPixelsRoute()
+    @getLifeTime()
     @width = 70
     @height = 70
     @pos = [0, 0]
@@ -89,9 +89,18 @@ class Game.Objects.Car
     @getPos()
     @getNextDestination()
     @explosionTime = 20
-  makeUturn: ->
-    if @uturn <= 0
-      @uturn = 180
+  getLifeTime: ->
+    n = @route.length - 1
+    i = 0
+    @lifeDistance = 0
+    while i < n
+      distance = @getDistance(@pixelsRoute[i], @pixelsRoute[i + 1])
+      @lifeDistance += distance
+      i++
+  getPixelsRoute: ->
+    @pixelsRoute = []
+    $.each @route, (i, r) =>
+      @pixelsRoute.push [@toX(r[1]), @toY(r[0])]
   kill: (scores) ->
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
