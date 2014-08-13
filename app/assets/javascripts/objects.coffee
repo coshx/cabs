@@ -232,7 +232,7 @@ class Game.Objects.LyftCar extends Game.Objects.Car
       x = @pos[0] + Game.Map.pos[0]
       y = @pos[1] + Game.Map.pos[1]
       if @sprite
-        ctx.drawImage(@currentSprite(), x + @width /2 , y + @height/2)
+        ctx.drawImage(@currentSprite(), x + @width / 2 , y + @height / 2)
 
 
 
