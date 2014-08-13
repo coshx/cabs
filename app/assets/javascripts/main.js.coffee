@@ -13,7 +13,7 @@ Game.Map.load()
 Game.objects = []
 
 $ ->
-  $(".fade").fadeIn()
+  $("#welcome-message").fadeIn()
   Game.canvas = document.getElementById('canvas')
   Game.canvas.addEventListener 'mousedown', (e) ->
     killed = 0
@@ -33,10 +33,15 @@ $ ->
   ctx.fillStyle = "#000000"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.render(0)
-  $(".button").click ->
+  $("#welcome-message .button").click ->
     Game.main()
-    $(".fade").fadeOut()
+    $("#welcome-message").fadeOut()
     Game.objects.push new Game.Objects.BlackUberCar()
+
+  $("#game-over .button").click ->
+    Game.lastTime = Date.now()
+    Game.startTime = Date.now()
+    $("#game-over").fadeOut()
 
 Game.render = (index) ->
   ctx = Game.ctx
@@ -47,14 +52,20 @@ Game.render = (index) ->
   for object in Game.objects
     object.render(index)
 
-Game.lastTime = Date.now()
-Game.startTime = Date.now()
-
 Game.alive = (a) ->
   a.alive
 
+Game.totalTime = 60
+Game.lastTime = Date.now()
+Game.startTime = Date.now()
+
+
 Game.updateTimer = ->
-  Game.timer = Math.round((Game.lastTime - Game.startTime) / 1000)
+  Game.timer = Game.totalTime - Math.round((Game.lastTime - Game.startTime) / 1000)
+  if Game.timer <= 0
+    $("#game-over").fadeIn()
+    $("#game-over .scores").text(Math.round(Game.User.score))
+    Game.timer = 0
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
     $("#timer").text(Game.timer)
@@ -66,15 +77,16 @@ Game.main = ->
   now = Date.now()
   dt = (now - Game.lastTime) / 1000.0
   Game.updateTimer()
-  Game.render(dt)
   Game.lastTime = now
+  if Game.timer >= 0
+    Game.render(dt)
 
-  if Game.objects.filter(Game.alive).length < 5
-    if Math.round(Math.random() * 100) > 98
-      Game.objects.push new Game.Objects.LyftCar()
-    else if Math.round(Math.random() * 100) > 60
-      Game.objects.push new Game.Objects.BlackUberCar()
-    else
-      Game.objects.push new Game.Objects.XUberCar()
+    if Game.objects.filter(Game.alive).length < 5
+      if Math.round(Math.random() * 100) > 98
+        Game.objects.push new Game.Objects.LyftCar()
+      else if Math.round(Math.random() * 100) > 60
+        Game.objects.push new Game.Objects.BlackUberCar()
+      else
+        Game.objects.push new Game.Objects.XUberCar()
 
   window.setTimeout Game.main, 1000 / 60

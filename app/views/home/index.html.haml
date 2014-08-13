@@ -10,7 +10,7 @@
 %canvas#canvas
 #prime-time
   PRIME TIME
-.fade{style: 'display: none'}
+.fade#welcome-message{style: 'display: none'}
   .message
     %h1
       Welcome to Lyft-ber!
@@ -20,4 +20,14 @@
       The idea of this game is to provide New York City cab drivers a way of releasing their emotions towards some new companies trying to disrupt the market.
     .button
       Start Game
+.fade#game-over{style: 'display: none'}
+  .message
+    %h1
+      Game Over and Congratulations!
+    %h2
+      You have earned $<span class="scores"></span> by robbing lyft-ber drivers.
+    %p
+      Text
+    .button
+      Start Over
 #timer
