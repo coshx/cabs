@@ -171,7 +171,7 @@ class Game.Objects.Car
           x = object.pos[0]
           y = object.pos[1]
           a = 0
-          if @pos[0] > x - a && @pos[0] < x + object.width + a && @pos[1] > y - a && @pos[1] < y + object.height + a
+          if @pos[0] > x - a && @pos[0] < x + (0.2 * object.width) + a && @pos[1] > y - a && @pos[1] < y + (0.6 * object.height) + a
             object.kill()
             @kill()
 
