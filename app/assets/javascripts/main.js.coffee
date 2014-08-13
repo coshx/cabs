@@ -20,7 +20,7 @@ $ ->
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
-      a = 30
+      a = 10
       if e.clientX > x - a && e.clientX < x + object.width + a && e.clientY > y - a && e.clientY < y + object.height + a
         object.kill(true)
         killed = killed + 1
@@ -73,7 +73,7 @@ Game.updateTimer = ->
 
   maxCars = ((60 - Game.timer) / 8) + 3
   minCars = 2
-  if Game.objects.filter(Game.alive).length < maxCars && Game.timer >= 0
+  if Game.objects.filter(Game.alive).length < maxCars && Game.timer > 0
 
     if (Game.timer % 3 == 0) || Game.objects.filter(Game.alive).length < minCars
       Game.spawnCar()
