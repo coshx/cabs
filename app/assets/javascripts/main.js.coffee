@@ -88,8 +88,11 @@ Game.updateTimer = ->
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
     $("#timer").text(Game.timer)
-    if Game.timer == 20 
+    if Game.timer == 20
       $("#prime-time").fadeIn()
+    if Game.timer == 10
+      $('#prime-time').addClass('animated bounceIn')
+
   Game.lastTimer = Game.timer
 
   maxCars = ((60 - Game.timer) / 10) + 3
