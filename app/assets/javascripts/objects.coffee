@@ -205,7 +205,7 @@ class Game.Objects.Car
     Math.sqrt( xs + ys )
 
   fare: ->
-    base = (@totalDistance / 600) - 3.0
+    base = (@totalDistance / 500) - 4.0
     base = 0 if base < 0
     ((@totalDistance / 1000) + base) * @fareMultiplier
 
@@ -255,7 +255,7 @@ class Game.Objects.BlackUberCar extends Game.Objects.Car
   lowFareImage: Assets.BlackUber.lowFareSprite
   midFareImage: Assets.BlackUber.midFareSprite
   highFareImage: Assets.BlackUber.highFareSprite
-  fareMultiplier: 1.3
+  fareMultiplier: 1.4
   constructor: ->
     super
 
