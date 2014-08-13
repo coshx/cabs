@@ -12,7 +12,7 @@ Game.User =
   subtractScore: (score) ->
     if score > 0.0
       @score = @score - (score / 2)
-      @scoreFlash(score, "#B00000")
+      @scoreFlash((score / 2), "#B00000")
       @render()
   render: ->
     $("#score").text("$" + @score.toFixed(2))
