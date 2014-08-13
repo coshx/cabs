@@ -71,6 +71,20 @@ Game.updateTimer = ->
     $("#timer").text(Game.timer)
   Game.lastTimer = Game.timer
 
+  maxCars = (Game.timer / 8) + 3
+  minCars = 2
+  if Game.objects.filter(Game.alive).length < maxCars && Game.timer >= 0
+
+    if (Game.timer % 3 == 0) || Game.objects.filter(Game.alive).length < minCars
+      Game.spawnCar()
+
+Game.spawnCar = ->
+  if Math.round(Math.random() * 100) > 98
+    Game.objects.push new Game.Objects.LyftCar()
+  else if Math.round(Math.random() * 100) > 60
+    Game.objects.push new Game.Objects.BlackUberCar()
+  else
+    Game.objects.push new Game.Objects.XUberCar()
 
 #main loop
 Game.main = ->
@@ -80,13 +94,4 @@ Game.main = ->
   Game.lastTime = now
   if Game.timer >= 0
     Game.render(dt)
-
-    if Game.objects.filter(Game.alive).length < 5
-      if Math.round(Math.random() * 100) > 98
-        Game.objects.push new Game.Objects.LyftCar()
-      else if Math.round(Math.random() * 100) > 60
-        Game.objects.push new Game.Objects.BlackUberCar()
-      else
-        Game.objects.push new Game.Objects.XUberCar()
-
   window.setTimeout Game.main, 1000 / 60
