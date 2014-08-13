@@ -26,6 +26,7 @@ Game.User =
   saveScore: (name, score) ->
     UserScore = Parse.Object.extend("UserScore")
     userScore = new UserScore()
+    @name= name
     userScore.save(
       name: name
       score: score
@@ -40,14 +41,24 @@ Game.User =
     query.limit(10)
     query.find
       success: (results) =>
-        @scores = results
-        scoreBoard = ""
+        @scores = []
         $.each results, (i, s) =>
-          console.log "S:", s
-          scoreBoard += "<tr><td>#{s.attributes.name}</td><td>#{s.attributes.score}</td></tr>"
-        $("#score-board table").append(scoreBoard)
+          @scores.push
+            name: s.attributes.name
+            score: s.attributes.score
+
       error: (error) ->
         @scores = []
+  addUserToScores: ->
+    @scores.push
+      name: @name
+      score: @score
+    @renderScoreBoard()
+  renderScoreBoard: ->
+    scoreBoard = "<tr><td>Name</td><td>Score</td></tr>"
+    $.each @scores, (i, s) =>
+      scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score}</td></tr>"
+    $("#score-board table").html(scoreBoard)
 
 Game.Map =
   topLeft: [40.758014, -74.013621]

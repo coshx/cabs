@@ -57,6 +57,7 @@ $ ->
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
     $("#game-over").fadeOut()
+    Game.User.synced = false
 
   $("#save-score .button").click ->
     Game.User.saveScore $("#save-score input").val(), Math.round(Game.User.score)
@@ -77,7 +78,7 @@ Game.render = (index) ->
 Game.alive = (a) ->
   a.alive
 
-Game.totalTime = 60
+Game.totalTime = 30
 Game.lastTime = Date.now()
 Game.startTime = Date.now()
 
@@ -92,6 +93,7 @@ Game.updateTimer = ->
     else
       $("#negative-scores").fadeIn()
     $("#game-over").fadeIn()
+    Game.User.renderScoreBoard()
     $("#game-over .scores").text(Math.abs(Math.round(Game.User.score)))
     Game.timer = 0
   # not to update every 1/60 second
