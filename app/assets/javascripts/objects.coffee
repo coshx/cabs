@@ -7,13 +7,19 @@ Game.User =
   addScore: (score) ->
     if score > 0.0
       @score = @score + score
-      @scoreFlash(score)
+      @scoreFlash(score, "#33FF99")
+      @render()
+  subtractScore: (score) ->
+    if score > 0.0
+      @score = @score - score
+      @scoreFlash(score, "#B00000")
       @render()
   render: ->
     $("#score").text("$" + @score.toFixed(2))
-  scoreFlash: (score) ->
+  scoreFlash: (score, color) ->
     $(".local-score-wrapper").stop().fadeIn(0)
     $("#local-score").text("$" + score.toFixed(2))
+    $("#local-score").css("color", color)
     $(".local-score-wrapper").fadeOut(2000)
 
 Game.Map =
@@ -64,7 +70,7 @@ class Game.Objects.Car
       @angle = @angle + 90
       @currentDistance = @getDistance(@pos, @distPos)
     else
-      @kill()
+      @arrive()
   loaded: false
   deadImage:  Assets.BlackUber.explodeSprite
 
@@ -91,9 +97,19 @@ class Game.Objects.Car
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
     Game.User.addScore(@fare()) if scores
+  arrive: () ->
+    console.log("arriving")
+    @complete = true
+    @alive = false
+    Game.objects.splice(Game.objects.indexOf(@), 1)
+    Game.objects.unshift(@)
+    Game.User.subtractScore(@fare())
+
   currentSprite: ->
     if @alive
-      if @totalDistance < 4000
+      if @complete
+        @deadSprite
+      else if @totalDistance < 4000
         @sprite
       else if @totalDistance < 8000
         @lowFareSprite
