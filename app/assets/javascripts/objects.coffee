@@ -129,8 +129,6 @@ class Game.Objects.Car
 
   currentSprite: ->
     if @alive
-      if @complete
-        @deadSprite
       else if @totalDistance < 4000
         @sprite
       else if @totalDistance < 8000
@@ -140,6 +138,8 @@ class Game.Objects.Car
       else
         @highFareSprite
     else
+          if @complete
+        @deadSprite
       @deadSprite
   load: ->
     image = new Image()
@@ -200,7 +200,6 @@ class Game.Objects.Car
 
   render: (index) ->
     unless @exploded
-      unless @alive
         @explosionTime = @explosionTime - 1
         @exploded = true if @explosionTime <= 0
       @move(index)
