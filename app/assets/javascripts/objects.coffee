@@ -26,13 +26,12 @@ Game.User =
   saveScore: (name, score) ->
     UserScore = Parse.Object.extend("UserScore")
     userScore = new UserScore()
-    @name= name
+    @name = name
     userScore.save(
       name: name
       score: score
-    ).then (object) ->
-      #action after saved
-      a = 1
+    ).then (object) =>
+      @addUserToScores()
   getScores: ->
     @synced = true
     UserScore = Parse.Object.extend("UserScore")
@@ -56,7 +55,7 @@ Game.User =
     @renderScoreBoard()
   renderScoreBoard: ->
     scoreBoard = "<tr><td>Name</td><td>Score</td></tr>"
-    $.each @scores, (i, s) =>
+    $.each @scores.reverse(), (i, s) =>
       scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score}</td></tr>"
     $("#score-board table").html(scoreBoard)
 
