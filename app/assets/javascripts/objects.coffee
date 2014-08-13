@@ -138,9 +138,10 @@ class Game.Objects.Car
       else
         @highFareSprite
     else
-          if @complete
+      if @complete
         @deadSprite
-      @deadSprite
+      else
+        @deadSprite
   load: ->
     image = new Image()
     image.src = @image
@@ -200,6 +201,7 @@ class Game.Objects.Car
 
   render: (index) ->
     unless @exploded
+      unless @alive
         @explosionTime = @explosionTime - 1
         @exploded = true if @explosionTime <= 0
       @move(index)
