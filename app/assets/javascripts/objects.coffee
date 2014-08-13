@@ -116,7 +116,11 @@ class Game.Objects.Car
   distance: 0
   totalDistance: 0
   constructor: ->
-    @route = Game.randomRoute()
+    routeDefined = false
+    while not routeDefined
+      @route = Game.randomRoute()
+      unless @positionMatch([@toX @route[0][1], @toY @route[0][0]])
+        routeDefined = true
     @getPixelsRoute()
     @getLifeTime()
     @width = 70
@@ -219,6 +223,17 @@ class Game.Objects.Car
     base = 0 if base < 0
     ((@totalDistance / 1000) + base) * @fareMultiplier
 
+  positionMatch: (pos) ->
+    result = false
+    for object in Game.objects.filter(Game.alive)
+      unless object == @
+        x = object.pos[0]
+        y = object.pos[1]
+        a = 0
+        if pos[0] > x - a && pos[0] < x + (0.2 * object.width) + a && pos[1] > y - a && pos[1] < y + (0.6 * object.height) + a
+          result = object
+    result
+
   move: (index) ->
     if @alive
       lag = index * 70
@@ -232,14 +247,10 @@ class Game.Objects.Car
         @pos[0] = @pos[0] + x
         @pos[1] = @pos[1] - y
       @totalDistance += @distance
-      for object in Game.objects.filter(Game.alive)
-        unless object == @
-          x = object.pos[0]
-          y = object.pos[1]
-          a = 0
-          if @pos[0] > x - a && @pos[0] < x + (0.2 * object.width) + a && @pos[1] > y - a && @pos[1] < y + (0.6 * object.height) + a
-            object.kill()
-            @kill()
+      object = @positionMatch(@pos, )
+      if object
+        object.kill()
+        @kill()
 
   render: (index) ->
     unless @exploded
