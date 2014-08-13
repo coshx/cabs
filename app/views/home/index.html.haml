@@ -32,9 +32,21 @@
     %h1
       Game Over!
     %h2
-      Congruatulations, you've earned $<span class="scores"></span> by robbing lyft-ber drivers.
+      .end-note#positive-scores{style: 'display: none'}
+        Congruatulations, you've earned $<span class="scores"></span> by robbing lyft-ber drivers.
+      .end-note#negative-scores{style: 'display: none'}
+        Aw man, you lost $<span class="scores"></span> while playing lyf-ber.
+        %br
+        Maybe you aren't cut out to be a cab driver...?
     %p
-      Text
+      Score Board
     .button
-      Start Over
+      .before
+        .tracer
+        %strong 1
+        %br
+        MIN
+      .middle
+        Start Over
+      .after
 #timer
