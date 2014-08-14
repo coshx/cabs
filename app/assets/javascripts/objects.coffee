@@ -164,7 +164,7 @@ class Game.Objects.Car
       distance = @getDistance(@pixelsRoute[i], @pixelsRoute[i + 1])
       @lifeDistance += distance
       i++
-  drawRoute: ->
+  drawSimpleRoute: ->
     n = @route.length - 1
     i = 0
     ctx = Game.ctx
@@ -175,6 +175,29 @@ class Game.Objects.Car
     while i < n
       ctx.moveTo(@pixelsRoute[i][0], @pixelsRoute[i][1])
       ctx.lineTo(@pixelsRoute[i + 1][0], @pixelsRoute[i + 1][1])
+      i++
+    ctx.stroke()
+    ctx.restore()
+  drawRoute: ->
+    n = @route.length - 1
+    i = 0
+    ctx = Game.ctx
+    ctx.save()
+    ctx.beginPath()
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#666666';
+    while i < n
+      if @currentDestination == i
+        ctx.moveTo(@pixelsRoute[i][0], @pixelsRoute[i][1])
+        ctx.lineTo(@pos[0], @pos[1])
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.strokeStyle = '#33FF33';
+        ctx.moveTo(@pos[0], @pos[1])
+        ctx.lineTo(@pixelsRoute[i + 1][0], @pixelsRoute[i + 1][1])
+      else
+        ctx.moveTo(@pixelsRoute[i][0], @pixelsRoute[i][1])
+        ctx.lineTo(@pixelsRoute[i + 1][0], @pixelsRoute[i + 1][1])
       i++
     ctx.stroke()
     ctx.restore()
