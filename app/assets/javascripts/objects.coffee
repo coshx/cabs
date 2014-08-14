@@ -251,7 +251,7 @@ class Game.Objects.Car
     distanceMultiplier = 1 if distanceMultiplier < 1
     distanceMultiplier = 4 if distanceMultiplier > 4
     base = @totalDistance / 100
-    base * distanceMultiplier * @fareMultiplier
+    base * distanceMultiplier * @typeMultiplier
 
   positionMatch: (pos) ->
     result = false
@@ -308,7 +308,7 @@ class Game.Objects.BlackUberCar extends Game.Objects.Car
   lowFareImage: Assets.BlackUber.lowFareSprite
   midFareImage: Assets.BlackUber.midFareSprite
   highFareImage: Assets.BlackUber.highFareSprite
-  fareMultiplier: 1.5
+  typeMultiplier: 1.5
   constructor: ->
     super
 
@@ -317,7 +317,7 @@ class Game.Objects.XUberCar extends Game.Objects.Car
   lowFareImage: Assets.XUber.lowFareSprite
   midFareImage: Assets.XUber.midFareSprite
   highFareImage: Assets.XUber.highFareSprite
-  fareMultiplier: 1.0
+  typeMultiplier: 1.0
   constructor: ->
     super
 
@@ -326,7 +326,7 @@ class Game.Objects.LyftCar extends Game.Objects.Car
   lowFareImage: Assets.Lyft.lowFareSprite
   midFareImage: Assets.Lyft.midFareSprite
   highFareImage: Assets.Lyft.highFareSprite
-  fareMultiplier: 2.0
+  typeMultiplier: 2.0
 
   constructor: ->
     super
