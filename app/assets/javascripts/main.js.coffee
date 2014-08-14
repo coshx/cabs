@@ -95,9 +95,13 @@ Game.alive = (a) ->
 Game.totalTime = 60
 Game.lastTime = Date.now()
 Game.startTime = Date.now()
+Game.bonusTime = 0
 
 
-Game.updateTimer = ->
+Game.updateTimer = (bonus) ->
+  if bonus
+    Game.bonusTime = bonus / 1000
+    Game.startTime += bonus
   Game.timer = Game.totalTime - Math.round((Game.lastTime - Game.startTime) / 1000)
   if Game.timer <= 0
     for object in Game.objects.filter(Game.alive)
@@ -112,6 +116,11 @@ Game.updateTimer = ->
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
     $("#timer").text(Game.timer)
+    if Game.bonusTime > 0
+      $("#timer").css("color", "#33FF99")
+      Game.bonusTime -= 1
+    else
+      $("#timer").css("color", "red")
     if Game.timer == 20
       $("#prime-time").fadeIn()
       Game.User.getScores() unless Game.User.synced
