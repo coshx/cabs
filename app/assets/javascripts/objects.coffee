@@ -81,25 +81,34 @@ Game.Map =
       ctx.drawImage(@sprite, x, y)
 
 class Game.Objects.ScoreFlash
-  constructor: (pos, score, color) ->
+  constructor: (pos, score, direction) ->
     @pos = pos
     @score = score
-    @color = color
-    @duration = 2
-    @startTime = Game.timer
+    if direction == "+"
+      @color = "#33FF99"
+      @symbol = "+"
+    else
+      @color = "#B00000"
+      @symbol = "-"
+    @duration = 0.5
+    @startTime = Date.now()
 
   render: (index) ->
+    @duration -= index
+    xPos = @pos[0] + (@duration * 10) - 50
+    yPos = @pos[1] + (@duration * 100) - 50
+    size = 40 + (20 - @duration * 40)
+
     ctx = Game.ctx
-    ctx.fillText("$" + @score.toFixed(2), @pos[0], @pos[1])
-    ctx.font = "50px Digital"
     ctx.save()
+
+    ctx.font = "#{size}px Digital"
     ctx.fillStyle = @color
+    ctx.fillText(@symbol + @score.toFixed(2), xPos, yPos)
     ctx.restore()
     @currentTime = Game.timer
-    if @startTime - @currentTime == @duration
+    if @duration < 0
       Game.objects.splice(Game.objects.indexOf(@), 1)
-      Game.objects.unshift(@)
-
 
 
 
@@ -185,16 +194,16 @@ class Game.Objects.Car
     fare = @fare()
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
-    Game.objects.push new Game.Objects.ScoreFlash(@pos, fare, "#33FF99")
+    Game.objects.push new Game.Objects.ScoreFlash(@pos, fare, "+") if scores
     Game.User.addScore(fare) if scores
   arrive: () ->
     @complete = true
     @alive = false
-    fare = @fare() / 2.0
+    half_fare = (@fare() / 2.0)
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
-    Game.objects.push new Game.Objects.ScoreFlash(@pos, fare, "#B00000")
-    Game.User.subtractScore(fare)
+    Game.objects.push new Game.Objects.ScoreFlash(@pos, half_fare, "-")
+    Game.User.subtractScore(half_fare)
 
   currentSprite: ->
     if @alive

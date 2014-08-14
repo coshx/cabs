@@ -83,8 +83,8 @@ Game.render = (index) ->
   Game.Map.render()
   Game.selectedObject.drawRoute() if Game.selectedObject
   for object in Game.objects
-    object.render(index)
-
+    object.render(index) if object
+  
 Game.alive = (a) ->
   a.alive
 
