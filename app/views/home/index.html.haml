@@ -5,8 +5,8 @@
         $0.00
     %p
       FARE
-    %a#full-screen{href: "#"}
-      Enter Full Screen
+    %a#toggle-fullscreen
+      Toggle Full Screen
 %canvas#canvas
 #prime-time.animated.bounceIn{style: 'display: none'}
   PRIME TIME
@@ -49,6 +49,9 @@
       .middle
         START GAME
       .after
+
+    %button#toggle-fullscreen
+      Toggle Fullscreen
 .fade#game-over{style: 'display: none'}
   .message
     %h1

@@ -56,6 +56,21 @@ $ ->
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
 
+  $("#toggle-fullscreen").click ->
+    # alternative standard method
+    if not document.fullscreenElement and not document.mozFullScreenElement and not document.webkitFullscreenElement # current working methods
+      if document.documentElement.requestFullscreen
+        document.documentElement.requestFullscreen()
+      else if document.documentElement.mozRequestFullScreen
+        document.documentElement.mozRequestFullScreen()
+      else document.documentElement.webkitRequestFullscreen Element.ALLOW_KEYBOARD_INPUT  if document.documentElement.webkitRequestFullscreen
+    else
+      if document.cancelFullScreen
+        document.cancelFullScreen()
+      else if document.mozCancelFullScreen
+        document.mozCancelFullScreen()
+      else document.webkitCancelFullScreen()  if document.webkitCancelFullScreen
+    return
 
   $("#game-over-button").click ->
     Game.User.score = 0.0
