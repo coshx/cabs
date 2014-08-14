@@ -57,6 +57,7 @@ $ ->
 
   $("#game-over-button").click ->
     Game.User.score = 0.0
+    Game.User.lastBonusLevel = 0
     $("#positive-scores").fadeOut()
     $("#negative-scores").fadeOut()
     $("#save-score").fadeIn()
