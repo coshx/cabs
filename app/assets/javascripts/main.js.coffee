@@ -82,6 +82,7 @@ $ ->
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
+    Game.timer = Game.totalTime
     $("#game-over").fadeOut()
     Game.User.synced = false
     Game.objects.push new Game.Objects.BlackUberCar()
