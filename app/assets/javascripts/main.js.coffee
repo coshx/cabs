@@ -3,7 +3,7 @@ window.Assets ||= {}
 Game.Objects ||= {}
 window.Routes ||= []
 
-Game.totalTime = 1
+Game.totalTime = 60
 
 Map = Game.Map
 
@@ -59,6 +59,7 @@ $ ->
 
   $("#game-over-button").click ->
     Game.User.score = 0.0
+    Game.User.lastBonusLevel = 0
     $("#positive-scores").fadeOut()
     $("#negative-scores").fadeOut()
     $("#save-score").fadeIn()
@@ -76,6 +77,15 @@ $ ->
     $("#save-score").fadeOut()
     $("#score-board").fadeIn()
 
+  $("#full-screen").click ->
+    docElm=document.body
+    if docElm.requestFullScreen
+      docElm.requestFullScreen()
+    else if docElm.mozRequestFullScreen
+      docElm.mozRequestFullScreen()
+    else if docElm.webkitRequestFullScreen
+      docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)    
+
 Game.render = (index) ->
   Game.Map.render()
   Game.selectedObject.drawRoute() if Game.selectedObject
@@ -87,6 +97,7 @@ Game.alive = (a) ->
 
 Game.lastTime = Date.now()
 Game.startTime = Date.now()
+Game.bonusTime = 0
 
 Game.gameOver = ->
   for object in Game.objects.filter(Game.alive)
@@ -104,11 +115,19 @@ Game.gameOver = ->
   Game.timer = 0
 
 
-Game.updateTimer = ->
+Game.updateTimer = (bonus) ->
   Game.timer = Game.totalTime - Math.round((Game.lastTime - Game.startTime) / 1000) unless Game.timer <= 0
+  if bonus
+    Game.bonusTime = bonus / 1000
+    Game.startTime += bonus
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
     $("#timer").text(Game.timer)
+    if Game.bonusTime > 0
+      $("#timer").css("color", "#33FF99")
+      Game.bonusTime -= 1
+    else
+      $("#timer").css("color", "red")
     if Game.timer == 20
       $("#prime-time").fadeIn()
       Game.User.getScores() unless Game.User.synced

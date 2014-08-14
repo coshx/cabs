@@ -4,10 +4,15 @@ Game.Objects = {}
 
 Game.User =
   score: 0.0
+  lastBonusLevel: 0
   addScore: (score) ->
     if score > 0.0
       @score = @score + score
       @render()
+    @currentBonusLevel = Math.floor(@score / 100.0)
+    if @currentBonusLevel > @lastBonusLevel
+      Game.updateTimer(5000)
+      @lastBonusLevel = @currentBonusLevel
   subtractScore: (score) ->
     if score > 0.0
       @score = @score - (score / 2)
@@ -58,9 +63,9 @@ Game.User =
       score: @score
     @renderScoreBoard()
   renderScoreBoard: ->
-    scoreBoard = "<tr><td><b>Name</b></td><td><b>Score</b></td></tr>"
+    scoreBoard = "<tr class='scoreboard-header'><td><b>Name</b></td><td><b>Score</b></td></tr>"
     $.each @scores, (i, s) =>
-      scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score.toFixed(2)}</td></tr>"
+      scoreBoard += "<tr><td>#{s.name}</td><td>$#{s.score.toFixed(2)}</td></tr>"
     $("#score-board table").html(scoreBoard)
 
 Game.Map =
@@ -197,8 +202,8 @@ class Game.Objects.Car
     ctx = Game.ctx
     ctx.save()
     ctx.beginPath()
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#666666';
+    ctx.lineWidth = 2
+    ctx.strokeStyle = '#999999'
     while i < n
       if @currentDestination == i
         ctx.moveTo(@pixelsRoute[i][0], @pixelsRoute[i][1])
@@ -287,7 +292,7 @@ class Game.Objects.Car
   fare: ->
     distanceMultiplier = @totalDistance / 300
     distanceMultiplier = 1 if distanceMultiplier < 1
-    distanceMultiplier = 4 if distanceMultiplier > 4
+    distanceMultiplier = 3 if distanceMultiplier > 3
     base = @totalDistance / 100
     base * distanceMultiplier * @typeMultiplier
 
