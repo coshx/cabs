@@ -199,11 +199,11 @@ class Game.Objects.Car
 
   currentSprite: ->
     if @alive
-      if @totalDistance < @lifeDistance / 4
+      if @totalDistance < 400
         @sprite
-      else if @totalDistance < @lifeDistance / 2
+      else if @totalDistance < 800
         @lowFareSprite
-      else if @totalDistance < @lifeDistance / 4*3
+      else if @totalDistance < 1600
         @midFareSprite
       else
         @highFareSprite
