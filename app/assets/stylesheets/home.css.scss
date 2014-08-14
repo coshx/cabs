@@ -240,6 +240,14 @@ a:active {
 .scoreboard-header {
   font-weight: bold;
 }
+.title {
+	font-size: 16px;
+	margin-top: 15px;
+}
+#game-title {
+	font-size: 20px;
+	display: block;
+}
 .local-score-wrapper {
 	position: fixed;
 	left: 50px;
