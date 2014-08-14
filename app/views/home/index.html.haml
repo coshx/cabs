@@ -12,6 +12,7 @@
   PRIME TIME
 .fade#welcome-message{style: 'display: none'}
   .message
+    =image_tag('angrycab_taxi.png', width: "90px")
     %h1
       Angry Cab
     %h2
@@ -49,9 +50,8 @@
       .middle
         START GAME
       .after
-
-    %button.toggle-fullscreen
-      Toggle Fullscreen
+    %a.toggle-fullscreen
+      Toggle Full Screen
 .fade#game-over{style: 'display: none'}
   .message
     %h1
