@@ -125,7 +125,7 @@ Game.gameOver = ->
   $("#prime-time").fadeOut(0)
   title = Game.User.title()
   $("#game-title").text(title.title)
-  $("#share-button").html("<div class='fb-share-button' data-href='http://angry-cab.herokuapp.com/title/#{title.slug}'></div>")
+  $("#share-button").html("<div class='fb-share-button' data-href='http://www.angry.cab/title/#{title.slug}'></div>")
   window.FB.XFBML.parse(document.getElementById('share-button'));
   $("#game-over").fadeIn()
   $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
