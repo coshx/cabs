@@ -45,7 +45,7 @@ Game.User =
       score: @score
     @renderScoreBoard()
   renderScoreBoard: ->
-    scoreBoard = "<tr><td><b>Name</b></td><td><b>Score</b></td></tr>"
+    scoreBoard = "<tr class='scoreboard-header'><td><b>Name</b></td><td><b>Score</b></td></tr>"
     $.each @scores, (i, s) =>
       scoreBoard += "<tr><td>#{s.name}</td><td>#{s.score.toFixed(2)}</td></tr>"
     $("#score-board table").html(scoreBoard)
