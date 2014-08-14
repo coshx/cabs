@@ -199,11 +199,11 @@ class Game.Objects.Car
 
   currentSprite: ->
     if @alive
-      if @totalDistance < 400
+      if @totalDistance < 250
         @sprite
-      else if @totalDistance < 800
+      else if @totalDistance < 500
         @lowFareSprite
-      else if @totalDistance < 1600
+      else if @totalDistance < 1000
         @midFareSprite
       else
         @highFareSprite
@@ -247,7 +247,7 @@ class Game.Objects.Car
     Math.sqrt( xs + ys )
 
   fare: ->
-    distanceMultiplier = @totalDistance / 400
+    distanceMultiplier = @totalDistance / 300
     distanceMultiplier = 1 if distanceMultiplier < 1
     distanceMultiplier = 4 if distanceMultiplier > 4
     base = @totalDistance / 100
