@@ -74,6 +74,15 @@ $ ->
     $("#save-score").fadeOut()
     $("#score-board").fadeIn()
 
+  $("#full-screen").click ->
+    docElm=document.body
+    if docElm.requestFullScreen
+      docElm.requestFullScreen()
+    else if docElm.mozRequestFullScreen
+      docElm.mozRequestFullScreen()
+    else if docElm.webkitRequestFullScreen
+      docElm.webkitRequestFullScreen()    
+
 Game.render = (index) ->
   Game.Map.render()
   Game.selectedObject.drawRoute() if Game.selectedObject

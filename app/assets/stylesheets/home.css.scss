@@ -53,6 +53,25 @@ canvas {
 	margin-bottom: 0px;
 	text-align: center;
 }
+.outside-box a{
+	color: white;
+	font-family: 'Open Sans light', sans-serif;
+	text-align: right;
+	font-size: 10px;
+	display: block;
+}
+.outside-box a:link{
+	text-decoration: none;
+}
+.outside-box a:visited{
+	text-decoration: none;
+}
+.outside-box a:hover{
+	text-decoration: underline;
+}
+.outside-box a:active{
+	text-decoration: underline;
+}
 .fade {
 	background: rgba(0,0,0,0.4);
 	position: fixed;
