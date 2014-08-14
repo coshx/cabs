@@ -56,26 +56,20 @@
 .fade#game-over{style: 'display: none'}
   .message.higher
     =image_tag('angrycab_taxi.png', width: "60px")
-    %h1
+    %h1.hide-on-board-show
       Game Over.
-    %h2
-      .end-note#positive-scores{style: 'display: none'}
-        Congruatulations, you've earned $<span class="scores"></span> by robbing drivers.
-        .title
-          Your title:
-          %span#game-title
-            Cab Ninjya
-          #share-button
-            Share
-      .end-note#negative-scores{style: 'display: none'}
-        Aw man, you lost $<span class="scores"></span>.
-        .title
-          Your title:
-          %span#game-title
-            Cab Ninjya
-        Maybe you aren't cut out to be a cab driver...?
-        #share-button
-          Share
+    .end-note#positive-scores.hide-on-board-show{style: 'display: none'}
+      Congruatulations, you've earned $<span class="scores"></span> by robbing drivers.
+    .end-note#negative-scores.hide-on-board-show{style: 'display: none'}
+      Aw man, you lost $<span class="scores"></span>.
+      %br
+      Maybe you aren't cut out to be a cab driver...?
+    .title
+      Your title:
+      %span#game-title
+        Cab Ninjya
+    #share-button
+      Share
     .end-note#save-score
       %p
         Save your score?
@@ -85,7 +79,6 @@
     .end-note#score-board{style: 'display: none'}
       .div.table-wrapper 
         %table
-    %br
     .button#game-over-button
       .before
         .tracer

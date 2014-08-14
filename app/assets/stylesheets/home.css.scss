@@ -177,8 +177,16 @@ canvas {
 			font-size: 12px;
 		}
 		.end-note{
+			font-size: 16px;
+			line-height: 20px;
 			.button{
 				min-width:180px;
+			}
+			p{
+				display: inline-block;
+				margin-left: 0px;
+				margin-right: 0px;
+				margin-top: 10px;
 			}
 			input {
 				line-height: 18px;
@@ -196,7 +204,6 @@ canvas {
 			.table-wrapper{
 				background-color: rgb(255,255,170);
 				margin-top: 20px;
-				margin-bottom: 20px;
 				margin-left: auto;
 				margin-right: auto;
 				max-width: 280px;
@@ -244,12 +251,17 @@ a:active {
   font-weight: bold;
 }
 .title {
+	line-height: 30px;
 	font-size: 16px;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 #game-title {
-	font-size: 20px;
+	font-size: 30px;
 	display: block;
+	font-weight: bold;
+}
+#game-over-button {
+	margin-top: 25px;
 }
 .local-score-wrapper {
 	position: fixed;
