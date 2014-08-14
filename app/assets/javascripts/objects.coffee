@@ -15,7 +15,7 @@ Game.User =
       @lastBonusLevel = @currentBonusLevel
   subtractScore: (score) ->
     if score > 0.0
-      @score = @score - (score / 2)
+      @score = @score - score
       @render()
 
   render: ->
@@ -240,6 +240,7 @@ class Game.Objects.Car
     half_fare = (@fare() / 2.0)
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
+
     Game.objects.push new Game.Objects.ScoreFlash(@pos, half_fare, "-")
     Game.User.subtractScore(half_fare)
 
