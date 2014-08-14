@@ -1,14 +1,14 @@
 -if @title.present?
-  %meta{content: "Your title is #{@title.title}", property: "og:title"}
+  %meta{content: "Your title is #{@title["title"]}", property: "og:title"}
   %meta{content: "article", property: "og:type"}
-  %meta{content: "url to pic", property: "og:image"}
-  %meta{content: "ws", property: "og:url"}
+  %meta{content: "http://url-to-pic", property: "og:image"}
+  %meta{content: "http://angry-cab.herokuapp.com/title/#{@title["slug"]}", property: "og:url"}
   %meta{content: "Cab furious", property: "og:site_name"}
-  %meta{property: "og:description", content: "desc"}
+  %meta{property: "og:description", content: " You laser cab"}
 -else
   %meta{content: "Generic decription", property: "og:title"}
   %meta{content: "website", property: "og:type"}
   %meta{content: "url to pic", property: "og:image"}
   %meta{content: "ws", property: "og:url"}
   %meta{content: "Generic name", property: "og:site_name"}
-  %meta{property: "og:description", content: "desc"}
+  %meta{property: "og:description", content: "Laser you cab"}
