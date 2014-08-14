@@ -162,7 +162,7 @@ class Game.Objects.Car
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
     Game.User.addScore(@fare()) if scores
-  arrive: () ->
+  arrive: ->
     @complete = true
     @alive = false
     Game.objects.splice(Game.objects.indexOf(@), 1)
@@ -171,11 +171,11 @@ class Game.Objects.Car
 
   currentSprite: ->
     if @alive
-      if @totalDistance < 4000
+      if @totalDistance < @lifeDistance / 4
         @sprite
-      else if @totalDistance < 8000
+      else if @totalDistance < @lifeDistance / 2
         @lowFareSprite
-      else if @totalDistance < 16000
+      else if @totalDistance < @lifeDistance / 4*3
         @midFareSprite
       else
         @highFareSprite
@@ -219,9 +219,9 @@ class Game.Objects.Car
     Math.sqrt( xs + ys )
 
   fare: ->
-    base = (@totalDistance / 500) - 4.0
+    base = (@totalDistance / 50) - 4.0
     base = 0 if base < 0
-    ((@totalDistance / 1000) + base) * @fareMultiplier
+    ((@totalDistance / 100) + base) * @fareMultiplier
 
   positionMatch: (pos) ->
     result = false
@@ -240,19 +240,21 @@ class Game.Objects.Car
       @distance = @distance + lag
       if @distance >= @currentDistance
         @pos = @distPos
+        @totalDistance += @getDistance(@pos, @distPos)
         @getNextDestination()
       else
         x = Math.sin(@angle * Math.PI/180) * lag
         y = Math.cos(@angle * Math.PI/180) * lag
         @pos[0] = @pos[0] + x
         @pos[1] = @pos[1] - y
-      @totalDistance += @distance
+        @totalDistance += @getDistance([0, 0], [x, y])
       object = @positionMatch(@pos, )
       if object
         object.kill()
         @kill()
 
   render: (index) ->
+
     unless @exploded
       unless @alive
         @explosionTime = @explosionTime - 1
