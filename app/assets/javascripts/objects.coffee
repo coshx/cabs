@@ -274,7 +274,7 @@ class Game.Objects.Car
   fare: ->
     distanceMultiplier = @totalDistance / 300
     distanceMultiplier = 1 if distanceMultiplier < 1
-    distanceMultiplier = 4 if distanceMultiplier > 4
+    distanceMultiplier = 3 if distanceMultiplier > 3
     base = @totalDistance / 100
     base * distanceMultiplier * @typeMultiplier
 
