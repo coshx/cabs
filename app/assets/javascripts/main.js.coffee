@@ -14,9 +14,29 @@ Game.randomRoute = ->
 Game.objects = []
 Game.Map.load(Game.Map.render)
 
+Game.isMobile =
+  Android: ->
+    return /Android/i.test(navigator.userAgent)
+  BlackBerry: ->
+    return /BlackBerry/i.test(navigator.userAgent)
+  iOS: ->
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent)
+  Windows: ->
+    return /IEMobile/i.test(navigator.userAgent)
+  any: ->
+    return (@Android() || @BlackBerry() || @iOS() || @Windows())
+
 $ ->
+
+  if Game.isMobile.any()
+    Game.touchRadius = 25
+    $("html").addClass("mobile")
+  else
+    Game.touchRadius = 10
+
   $("#welcome-message").fadeIn()
   Game.canvas = document.getElementById('canvas')
+
   Game.canvas.addEventListener 'mousedown', (e) ->
     killed = 0
     mouseX = e.layerX
@@ -24,8 +44,7 @@ $ ->
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
-      a = 10
-      if mouseX > x - a - object.width / 2 && mouseX < x + object.width / 2 + a && mouseY > y - a -  object.height / 2 && mouseY < y + object.height / 2 + a
+      if mouseX > x - Game.touchRadius - object.width / 2 && mouseX < x + object.width / 2 + Game.touchRadius && mouseY > y - Game.touchRadius -  object.height / 2 && mouseY < y + object.height / 2 + Game.touchRadius
         object.kill(true)
         killed = killed + 1
   Game.canvas.addEventListener 'mousemove', (e) ->
@@ -35,8 +54,7 @@ $ ->
     for object in Game.objects.filter(Game.alive)
       x = object.pos[0] + Map.pos[0]
       y = object.pos[1] + Map.pos[1]
-      a = 10
-      if mouseX > x - a && mouseX < x + object.width + a && mouseY > y - a && mouseY < y + object.height + a
+      if mouseX > x - Game.touchRadius && mouseX < x + object.width + Game.touchRadius && mouseY > y - Game.touchRadius && mouseY < y + object.height + Game.touchRadius
         Game.selectedObject = object
         selected += 1
     Game.selectedObject = null if selected == 0

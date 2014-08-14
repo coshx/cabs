@@ -325,7 +325,7 @@ class Game.Objects.Car
         @pos[0] = @pos[0] + x
         @pos[1] = @pos[1] - y
         @totalDistance += @getDistance([0, 0], [x, y])
-      object = @positionMatch(@pos, )
+      object = @positionMatch(@pos)
       if object
         object.kill()
         @kill()
