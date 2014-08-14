@@ -4,10 +4,15 @@ Game.Objects = {}
 
 Game.User =
   score: 0.0
+  lastBonusLevel: 0
   addScore: (score) ->
     if score > 0.0
       @score = @score + score
       @render()
+    @currentBonusLevel = Math.floor(@score / 100.0)
+    if @currentBonusLevel > @lastBonusLevel
+      Game.updateTimer(5000)
+      @lastBonusLevel = @currentBonusLevel
   subtractScore: (score) ->
     if score > 0.0
       @score = @score - (score / 2)

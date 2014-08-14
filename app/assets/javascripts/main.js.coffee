@@ -88,7 +88,9 @@ Game.lastTime = Date.now()
 Game.startTime = Date.now()
 
 
-Game.updateTimer = ->
+Game.updateTimer = (bonus) ->
+  if bonus
+    Game.startTime += bonus
   Game.timer = Game.totalTime - Math.round((Game.lastTime - Game.startTime) / 1000)
   if Game.timer <= 0
     for object in Game.objects.filter(Game.alive)
