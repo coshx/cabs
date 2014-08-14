@@ -33,16 +33,15 @@ Game.User =
 
   title: ->
     l = Game.titles.length - 1
-    i = 0
-    while i < l
-      if Game.titles[i].score >= @score
-        result = Game.titles[i]
-        i = l
-      i++
+    while l >= 0
+      if @score >= Game.titles[l].score
+        result = Game.titles[l]
+        l = -1
+      l--
     if result
       result
     else
-      Game.titles[0]  
+      Game.titles[0]
 
   getScores: ->
     @synced = true
