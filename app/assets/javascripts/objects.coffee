@@ -247,9 +247,10 @@ class Game.Objects.Car
     Math.sqrt( xs + ys )
 
   fare: ->
-    base = (@totalDistance / 50) - 4.0
-    base = 0 if base < 0
-    ((@totalDistance / 100) + base) * @fareMultiplier
+    distanceMultiplier = @totalDistance / 400
+    distanceMultiplier = 1 if distanceMultiplier < 1
+    base = @totalDistance / 100
+    base * distanceMultiplier * @fareMultiplier
 
   positionMatch: (pos) ->
     result = false
