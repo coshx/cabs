@@ -1,5 +1,5 @@
 -if @title.present?
-  %meta{content: "You're a #{@title["title"]}", property: "og:title"}
+  %meta{content: "Your title is #{@title["title"]}", property: "og:title"}
   %meta{content: "game", property: "og:type"}
   %meta{content: "http://www.angry.cab/assets/angrycab_taxi.png", property: "og:image"}
   %meta{content: "http://www.angry.cab/title/#{@title["slug"]}", property: "og:url"}

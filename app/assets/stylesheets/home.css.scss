@@ -25,7 +25,7 @@ canvas {
 	background-color: black;
 	z-index: 2;
 	position: fixed;
-	left: 1050px;
+	right: 90px;
 	top: 30px;
 	padding: 7px;
 	display: inline-block;
@@ -73,8 +73,8 @@ canvas {
 		background: white;
 		width: 500px;
 		height: 250;
-		top: 50%;
-		left: 50%;
+		top: 42%;
+		left: 47%;
 		margin-left: -250px;
 		margin-top: -185px;
 		padding: 20px;
@@ -210,6 +210,9 @@ canvas {
 			}
 		}
 	}
+	.higher {
+		top: 30%;
+	}
 }
 a {
 	text-decoration: none;
@@ -231,7 +234,7 @@ a:active {
 }
 .fullscreen-box {
 	position: fixed;
-	left: 100px;
+	left: 7%;
 	top: 30px;
 	background-color: white;
 	border-radius: 10px;
