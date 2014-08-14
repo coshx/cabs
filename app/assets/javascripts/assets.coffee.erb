@@ -1,4 +1,6 @@
 window.Assets ||= {}
+window.Game ||= {}
+
 Assets.Map = {}
 Assets.Map.sprite = "<%= image_path('manhattan2.png') %>"
 Assets.BlackUber = {}
@@ -20,3 +22,5 @@ Assets.XUber.lowFareSprite = "<%= image_path('sprites/uberx_1dot.png') %>"
 Assets.XUber.midFareSprite = "<%= image_path('sprites/uberx_2dot.png') %>"
 Assets.XUber.highFareSprite = "<%= image_path('sprites/uberx_3dot.png') %>"
 Assets.completeSprite = "<%= image_path('sprites/flag_red.png') %>"
+
+Game.titles = <%= TITLES.to_json %>

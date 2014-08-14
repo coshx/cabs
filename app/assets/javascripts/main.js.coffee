@@ -3,6 +3,8 @@ window.Assets ||= {}
 Game.Objects ||= {}
 window.Routes ||= []
 
+Game.totalTime = 1
+
 Map = Game.Map
 
 Game.randomRoute = ->
@@ -83,23 +85,27 @@ Game.render = (index) ->
 Game.alive = (a) ->
   a.alive
 
-Game.totalTime = 60
 Game.lastTime = Date.now()
 Game.startTime = Date.now()
 
+Game.gameOver = ->
+  for object in Game.objects.filter(Game.alive)
+    object.kill()
+  if Game.User.score > 0
+    $("#positive-scores").fadeIn()
+  else
+    $("#negative-scores").fadeIn()
+  title = Game.User.title()
+  $("#game-title").text(title.title)
+  $("#share-button").html("<div class='fb-share-button' data-href='http://angry-cab.herokuapp.com/title/#{title.slug}'></div>")
+  FB.XFBML.parse(document.getElementById('share-button'));
+  $("#game-over").fadeIn()
+  $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
+  Game.timer = 0
+
 
 Game.updateTimer = ->
-  Game.timer = Game.totalTime - Math.round((Game.lastTime - Game.startTime) / 1000)
-  if Game.timer <= 0
-    for object in Game.objects.filter(Game.alive)
-      object.kill()
-    if Game.User.score > 0
-      $("#positive-scores").fadeIn()
-    else
-      $("#negative-scores").fadeIn()
-    $("#game-over").fadeIn()
-    $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
-    Game.timer = 0
+  Game.timer = Game.totalTime - Math.round((Game.lastTime - Game.startTime) / 1000) unless Game.timer <= 0
   # not to update every 1/60 second
   if Game.timer != Game.lastTimer
     $("#timer").text(Game.timer)
@@ -108,6 +114,8 @@ Game.updateTimer = ->
       Game.User.getScores() unless Game.User.synced
     if Game.timer == 10
       $('#prime-time').addClass('animated bounceIn')
+    if Game.timer <= 0
+      Game.gameOver()
 
   maxCars = ((60 - Game.timer) / 10) + 4
   minCars = ((60 - Game.timer) / 12) + 2

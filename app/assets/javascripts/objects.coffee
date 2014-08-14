@@ -12,8 +12,10 @@ Game.User =
     if score > 0.0
       @score = @score - (score / 2)
       @render()
+
   render: ->
     $("#score").text("$" + @score.toFixed(2))
+
   saveScore: (name, score) ->
     UserScore = Parse.Object.extend("UserScore")
     userScore = new UserScore()
@@ -23,6 +25,17 @@ Game.User =
       score: score
     ).then (object) =>
       @addUserToScores()
+
+  title: ->
+    l = Game.titles.length - 1
+    i = 0
+    while i < l
+      if Game.titles[i].score >= @score
+        result = Game.titles[i]
+        i = l
+      i++
+    result
+
   getScores: ->
     @synced = true
     UserScore = Parse.Object.extend("UserScore")

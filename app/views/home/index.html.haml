@@ -50,7 +50,11 @@
 .fade#game-over{style: 'display: none'}
   .message
     %h1
-      Game Over!
+      Game Over. Your title: 
+      %span#game-title
+        Cab Ninjya
+    #share-button
+      Share
     %h2
       .end-note#positive-scores{style: 'display: none'}
         Congruatulations, you've earned $<span class="scores"></span> by robbing lyft-ber drivers.
