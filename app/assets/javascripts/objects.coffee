@@ -249,6 +249,7 @@ class Game.Objects.Car
   fare: ->
     distanceMultiplier = @totalDistance / 400
     distanceMultiplier = 1 if distanceMultiplier < 1
+    distanceMultiplier = 4 if distanceMultiplier > 4
     base = @totalDistance / 100
     base * distanceMultiplier * @fareMultiplier
 
@@ -307,7 +308,7 @@ class Game.Objects.BlackUberCar extends Game.Objects.Car
   lowFareImage: Assets.BlackUber.lowFareSprite
   midFareImage: Assets.BlackUber.midFareSprite
   highFareImage: Assets.BlackUber.highFareSprite
-  fareMultiplier: 1.4
+  fareMultiplier: 1.5
   constructor: ->
     super
 
