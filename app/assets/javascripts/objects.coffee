@@ -57,12 +57,14 @@ Game.Map =
   image: Assets.Map.sprite
   width: 1251
   height: 766
-  load: ->
+  load: (callback) ->
     image = new Image()
     image.src = @image
     @sprite = image
     @px = Game.Map.width /  (Game.Map.bottomRight[1] - Game.Map.topLeft[1])
     @py = Game.Map.height / (Game.Map.topLeft[0] - Game.Map.bottomRight[0])
+    $(image).load =>
+      callback.call(@)
 
   render: (index) ->
     ctx = Game.ctx

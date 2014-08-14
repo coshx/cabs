@@ -9,8 +9,8 @@ Game.randomRoute = ->
   n = Routes.length - 1
   Routes[Math.round(Math.random() * n)]
 
-Game.Map.load()
 Game.objects = []
+Game.Map.load(Game.Map.render)
 
 $ ->
   $("#welcome-message").fadeIn()
@@ -45,7 +45,6 @@ $ ->
   ctx = Game.ctx
   ctx.fillStyle = "#000000"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
-  Game.render(0)
   $("#welcome-message .button").click ->
     Game.main()
     $("#welcome-message").fadeOut()
@@ -76,15 +75,11 @@ $ ->
     $("#score-board").fadeIn()
 
 Game.render = (index) ->
-  ctx = Game.ctx
-  canvas = Game.canvas
-  ctx.fillStyle = '#345678'
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
   Game.Map.render()
   Game.selectedObject.drawRoute() if Game.selectedObject
   for object in Game.objects
     object.render(index) if object
-  
+
 Game.alive = (a) ->
   a.alive
 
