@@ -56,7 +56,7 @@ $ ->
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
 
-  $("#toggle-fullscreen").click ->
+  $(".toggle-fullscreen").click ->
     # alternative standard method
     if not document.fullscreenElement and not document.mozFullScreenElement and not document.webkitFullscreenElement # current working methods
       if document.documentElement.requestFullscreen
