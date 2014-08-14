@@ -5,6 +5,7 @@
         $0.00
     %p
       FARE
+  .div.fullscreen-box
     %a.toggle-fullscreen
       Toggle Full Screen
 %canvas#canvas
@@ -54,19 +55,27 @@
       Toggle Full Screen
 .fade#game-over{style: 'display: none'}
   .message
+    =image_tag('angrycab_taxi.png', width: "90px")
     %h1
-      Game Over. Your title: 
-      %span#game-title
-        Cab Ninjya
-    #share-button
-      Share
+      Game Over.
     %h2
       .end-note#positive-scores{style: 'display: none'}
         Congruatulations, you've earned $<span class="scores"></span> by robbing drivers.
+        .title
+          Your title:
+          %span#game-title
+            Cab Ninjya
+          #share-button
+            Share
       .end-note#negative-scores{style: 'display: none'}
         Aw man, you lost $<span class="scores"></span>.
-        %br
+        .title
+          Your title:
+          %span#game-title
+            Cab Ninjya
         Maybe you aren't cut out to be a cab driver...?
+        #share-button
+          Share
     .end-note#save-score
       %p
         Save your score?

@@ -229,9 +229,24 @@ a:visited {
 a:active {
 	text-decoration: underline;
 }
-
+.fullscreen-box {
+	position: fixed;
+	left: 100px;
+	top: 30px;
+	background-color: white;
+	border-radius: 10px;
+	padding: 5px;
+}
 .scoreboard-header {
   font-weight: bold;
+}
+.title {
+	font-size: 16px;
+	margin-top: 15px;
+}
+#game-title {
+	font-size: 20px;
+	display: block;
 }
 .local-score-wrapper {
 	position: fixed;
