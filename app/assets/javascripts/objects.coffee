@@ -184,8 +184,8 @@ class Game.Objects.Car
     ctx = Game.ctx
     ctx.save()
     ctx.beginPath()
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#666666';
+    ctx.lineWidth = 2
+    ctx.strokeStyle = '#999999'
     while i < n
       if @currentDestination == i
         ctx.moveTo(@pixelsRoute[i][0], @pixelsRoute[i][1])
