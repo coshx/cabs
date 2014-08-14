@@ -3,7 +3,7 @@ window.Assets ||= {}
 Game.Objects ||= {}
 window.Routes ||= []
 
-Game.totalTime = 60
+Game.totalTime = 21
 
 Map = Game.Map
 
@@ -79,6 +79,7 @@ $ ->
     $("#negative-scores").fadeOut()
     $("#save-score").fadeIn()
     $("#score-board").fadeOut()
+    $(".hide-on-board-show").fadeIn()
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
@@ -92,6 +93,7 @@ $ ->
     Game.User.saveScore $("#save-score input").val(), Game.User.score
     $("#save-score").fadeOut()
     $("#score-board").fadeIn()
+    $(".hide-on-board-show").fadeOut()
 
   $("#full-screen").click ->
     docElm=document.body
