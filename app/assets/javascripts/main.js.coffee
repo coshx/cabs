@@ -99,7 +99,7 @@ $ ->
     else if docElm.mozRequestFullScreen
       docElm.mozRequestFullScreen()
     else if docElm.webkitRequestFullScreen
-      docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)    
+      docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
 
 Game.render = (index) ->
   Game.Map.render()
@@ -121,6 +121,7 @@ Game.gameOver = ->
     $("#positive-scores").fadeIn()
   else
     $("#negative-scores").fadeIn()
+  $("#prime-time").fadeOut(0)
   title = Game.User.title()
   $("#game-title").text(title.title)
   $("#share-button").html("<div class='fb-share-button' data-href='http://angry-cab.herokuapp.com/title/#{title.slug}'></div>")
