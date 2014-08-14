@@ -81,7 +81,7 @@ $ ->
     else if docElm.mozRequestFullScreen
       docElm.mozRequestFullScreen()
     else if docElm.webkitRequestFullScreen
-      docElm.webkitRequestFullScreen()    
+      docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)    
 
 Game.render = (index) ->
   Game.Map.render()
