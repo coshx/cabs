@@ -98,7 +98,6 @@ Game.updateTimer = ->
     else
       $("#negative-scores").fadeIn()
     $("#game-over").fadeIn()
-    Game.User.renderScoreBoard()
     $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
     Game.timer = 0
   # not to update every 1/60 second
