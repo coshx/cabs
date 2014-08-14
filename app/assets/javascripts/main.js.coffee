@@ -56,7 +56,7 @@ $ ->
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
 
-  $("#toggle-fullscreen").click ->
+  $(".toggle-fullscreen").click ->
     # alternative standard method
     if not document.fullscreenElement and not document.mozFullScreenElement and not document.webkitFullscreenElement # current working methods
       if document.documentElement.requestFullscreen
@@ -82,6 +82,7 @@ $ ->
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
+    Game.timer = Game.totalTime
     $("#game-over").fadeOut()
     Game.User.synced = false
     Game.objects.push new Game.Objects.BlackUberCar()
