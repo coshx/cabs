@@ -83,12 +83,11 @@ canvas {
 			cursor: pointer;
 			text-align: center;
 			opacity: 2;
-			font-weight: bold;
 			color: white;
 			display: inline-block;
 			min-width: 203px;
 			font-family: 'Open Sans light', sans-serif;
-			font-weight: 700;
+			font-weight: 300;
 			letter-spacing: 0.2px;
 			&:hover {
 				opacity: 0.8;
@@ -128,24 +127,62 @@ canvas {
 		}
 		h1, h2 {
 			margin: 1px;
+			margin-bottom: 5px;
 			text-align: center;
 			line-height: 30px;
 		}
 		p{
 			line-height: 20px;
+			margin-top: 5px;
+			margin-bottom: 10px;
 		}
 		ol {
 			font-size: 18px;
 			font-weight: 700;
 			line-height: 23px;
+			li {
+				.text{
+					vertical-align: middle;
+					display: inline-block;
+					height: 18px;
+				}
+				.rotate-car-image {
+					transform: rotate(90deg);
+					vertical-align: middle;
+			  	}
+			  	.make-smaller {
+			  		max-width: 30px;
+			  		display: inline-block;
+			  		margin-left: 5px;
+			  		margin-right: 10px;
+			  		vertical-align: middle;
+			  	}
+			  	.lyft {
+			  		margin-top: 13px;
+			  	}
+			}
 		}
 		.end-note{
-			table {
-				text-align: left;
+			.button{
+				min-width:180px;
+			}
+			.save.button{
+				max-width:100px;
+			}
+			.table-wrapper{
+				background-color: rgb(255,255,170);
+				margin-top: 20px;
+				margin-bottom: 20px;
 				margin-left: auto;
 				margin-right: auto;
+				min-width: 300px;
+				position: inline-block;
+				table {
+					text-align: left;
+					margin-left: auto;
+					margin-right: auto;
+				}
 			}
-
 		}
 	}
 }

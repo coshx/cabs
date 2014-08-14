@@ -11,24 +11,33 @@
 .fade#welcome-message{style: 'display: none'}
   .message
     %h1
-      Welcome to Lyf-ber!
+      FlappyCab
     %h2
-      A game for New York City cab drivers
+      Welcome, soldier.
     %p
-      This game provides New York City cab drivers a way of releasing their emotions towards some new companies that are disrupting the market.
+      The Taxi Cab Unions of New York City are not happy with new companies disrupting their market. They've hired you to take sattelite guns and destroy their competition.
     %ol.rules
       %li
-        Collect as much cab fare as you can in 60 sec.
+        You have 60 seconds.
       %li
-        Click on a car to destroy it and collect its fare.
+        Destroy cars to collect fares.
       %li
-        The further a car has gone, the higher the fare will be. Cars with high fares will have more green dots.
+        More distance = more money. Dots indicate distance.
       %li
-        Lyf's will give you the most money, then Bers, then BerXs.
+        .rotate-car-image.make-smaller
+          =image_tag('sprites/uberx.png', width: "40px")
+        .text
+          < 
+        .rotate-car-image.make-smaller
+          =image_tag('sprites/black.png', width: "40px")
+        .text
+          <
+        .lyft.make-smaller
+          =image_tag('sprites/lyft.png', width: "30px")
       %li
-        If two cars collide, they will both explode without giving you the fare.
+        Collisions = No Points
       %li
-        Watch out! You'll lose money if a passenger is dropped off and you haven't crushed the car!
+        Destroy cars before their destination or LOSE money!
     .button
       .before
         .tracer
@@ -53,14 +62,18 @@
       %p
         Save your score?
       %input{placeholder: "nickname"}
-      .button
-        Save
+      .save.button
+        SAVE
     .end-note#score-board{style: 'display: none'}
-      %table
-        %tbody
-          %tr.scoreboard-header
-            %td Name
-            %td Score
+      .div.table-wrapper 
+        %table
+          %tbody
+            %tr.scoreboard-header
+              %td Name
+              %td Score
+            %tr
+              %td Neeharika
+              %td 14323.23
     %br
     .button#game-over-button
       .before
@@ -69,6 +82,6 @@
         %br
         MIN
       .middle
-        Start Over
+        START OVER
       .after
 #timer
