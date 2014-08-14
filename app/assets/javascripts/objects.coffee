@@ -7,22 +7,13 @@ Game.User =
   addScore: (score) ->
     if score > 0.0
       @score = @score + score
-      @scoreFlash(score, "#33FF99")
       @render()
   subtractScore: (score) ->
     if score > 0.0
       @score = @score - (score / 2)
-      @scoreFlash((score / 2), "#B00000")
       @render()
   render: ->
     $("#score").text("$" + @score.toFixed(2))
-  scoreFlash: (score, color) ->
-    $(".local-score-wrapper").stop().show(0)
-    $('#local-score').removeClass()
-    $('#local-score').addClass('animated bounceIn')
-    $("#local-score").text("$" + score.toFixed(2))
-    $("#local-score").css("color", color)
-    $(".local-score-wrapper").fadeOut(2000)
   saveScore: (name, score) ->
     UserScore = Parse.Object.extend("UserScore")
     userScore = new UserScore()
