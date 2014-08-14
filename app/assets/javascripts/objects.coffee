@@ -39,7 +39,10 @@ Game.User =
         result = Game.titles[i]
         i = l
       i++
-    result
+    if result
+      result
+    else
+      Game.titles[0]  
 
   getScores: ->
     @synced = true
