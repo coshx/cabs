@@ -15,3 +15,4 @@
 //= require assets
 //= require objects
 //= require main
+//= require social

@@ -2,32 +2,13 @@ window.Game ||= {}
 window.Assets ||= {}
 Game.Objects ||= {}
 window.Routes ||= []
+window.Social ||= {}
 
-Game.totalTime = 60
+
+Game.totalTime = 5
 
 
 $ ->
-  Game.login = (callback) ->
-    FB.login(callback, {scope: 'user_friends'})
-  loginCallback = (response) ->
-    console.log "loginCallback", response
-    top.location.href = "https://www.facebook.com/appcenter/YOUR_APP_NAMESPACE"  unless response.status is "connected"
-  onStatusChange = (response) ->
-    unless response.status is "connected"
-      Game.login loginCallback
-    else
-      showHome()
-  onAuthResponseChange = (response) ->
-    console.log "onAuthResponseChange", response
-
-  FB.init
-    appId: 1440904569532160
-    frictionlessRequests: true
-    status: true
-    version: 'v2.0'
-
-  FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange)
-  FB.Event.subscribe('auth.statusChange', onStatusChange)
 
 Map = Game.Map
 
@@ -196,6 +177,16 @@ Game.gameOver = ->
   $("#game-over").fadeIn 400, ->
     Game.centerPopup("#game-over")
   Game.timer = 0
+
+  if !Social.hasPermission("publish_actions") and !Social.friendCache.reRequests["publish_actions"]
+    Social.showConfirmationPopup "Do you want to publish your scores to Facebook?", (response) ->
+      Social.friendCache.reRequests["user_friends"] = true
+      if response is Social.CONFIRM_YES
+        Social.reRequest "publish_actions", ->
+          Social.getPermissions ->
+            Social.sendScore Game.score, ->
+  else
+    Social.sendScore Game.score, ->
 
 
 Game.updateTimer = (bonus) ->
