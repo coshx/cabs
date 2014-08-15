@@ -14,6 +14,7 @@ Game.randomRoute = ->
 Game.objects = []
 Game.Map.load(Game.Map.render)
 
+<<<<<<< Updated upstream
 Game.isMobile =
   Android: ->
     return /Android/i.test(navigator.userAgent)
@@ -35,6 +36,17 @@ $ ->
     Game.touchRadius = 10
 
   $("#welcome-message").fadeIn()
+=======
+Game.centerPopup = (id) ->
+  message = $("#{id} .message")
+  messageHeight = message.height()
+  newHeight = -messageHeight/2
+  message.css("margin-top", newHeight)
+
+$ ->
+  $("#welcome-message").fadeIn 400, ->
+    Game.centerPopup("#welcome-message")
+>>>>>>> Stashed changes
   Game.canvas = document.getElementById('canvas')
 
   Game.canvas.addEventListener 'mousedown', (e) ->
@@ -110,8 +122,9 @@ $ ->
   $("#save-score .button").click ->
     Game.User.saveScore $("#save-score input").val(), Game.User.score
     $("#save-score").fadeOut()
-    $("#score-board").fadeIn()
     $(".hide-on-board-show").fadeOut()
+    $("#score-board").fadeIn 400, ->
+      Game.centerPopup("#game-over")
 
   $("#full-screen").click ->
     docElm=document.body
@@ -145,10 +158,11 @@ Game.gameOver = ->
   $("#prime-time").fadeOut(0)
   title = Game.User.title()
   $("#game-title").text(title.title)
-  $("#share-button").html("<div class='fb-share-button' data-href='http://www.angry.cab/title/#{title.slug}'></div>")
+  $("#share-button").html("<div class='fb-share-button' data-type='button' data-width='70px' data-href='http://www.angry.cab/title/#{title.slug}'></div>")
   window.FB.XFBML.parse(document.getElementById('share-button'));
-  $("#game-over").fadeIn()
   $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
+  $("#game-over").fadeIn 400, ->
+    Game.centerPopup("#game-over")
   Game.timer = 0
 
 

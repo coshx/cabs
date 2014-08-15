@@ -73,15 +73,17 @@ canvas {
 		background: white;
 		width: 500px;
 		height: 250;
-		top: 42%;
-		left: 47%;
-		margin-left: -250px;
-		margin-top: -185px;
+		top: 50%;
+		left: 50%;
+		margin-left: -290px;
+		margin-top: -230px;
 		padding: 20px;
 		font-family: 'Titillium Web', sans-serif;
 		font-weight: bold 700;
 		border-radius: 15px;
 		text-align: center;
+		-webkit-transition: all 0.1s ease-out;
+        transition: all 0.1s ease-out;
 		.button {
 			background: #000000;
 			border-radius: 24px;
@@ -179,6 +181,7 @@ canvas {
 		.end-note{
 			font-size: 16px;
 			line-height: 20px;
+			margin-top: 10px;
 			.button{
 				min-width:180px;
 			}
@@ -216,9 +219,6 @@ canvas {
 				}
 			}
 		}
-	}
-	.higher {
-		top: 30%;
 	}
 }
 a {
@@ -261,7 +261,7 @@ a:active {
 	font-weight: bold;
 }
 #game-over-button {
-	margin-top: 25px;
+	margin-top: 15px;
 }
 .local-score-wrapper {
 	position: fixed;
