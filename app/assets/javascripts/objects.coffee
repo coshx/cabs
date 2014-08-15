@@ -29,8 +29,8 @@ Game.User =
     $("#score").text("$" + UserScore.toFixed(2))
 
   saveScore: (name, score) ->
-    UserScore = Parse.Object.extend("UserScore")
-    userScore = new UserScore()
+    UserScores = Parse.Object.extend("UserScore")
+    userScore = new UserScores()
     @name = name
     userScore.save(
       name: name
