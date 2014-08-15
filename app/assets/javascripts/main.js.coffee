@@ -175,8 +175,7 @@ Game.updateTimer = (bonus) ->
 
 
   maxCars = ((60 - Game.timer) / 10) + 4
-  maxCars -= 1 if Game.timer < 40 
-  console.log(maxCars)
+  maxCars -= 1 if Game.timer > 40 
   minCars = ((60 - Game.timer) / 12) + 2
   if Game.objects.filter(Game.alive).length < maxCars && 0 < Game.timer < 57
 
