@@ -32,6 +32,13 @@ Game.centerPopup = (id) ->
   newHeight = -messageHeight/2
   message.css("margin-top", newHeight)
 
+Game.centerCanvas = ->
+  canvasElm = $("canvas")
+  oldWindowHeight = $(window).height()
+  oldCanvasHeight = canvasElm.height()
+  canvasAdjustment = Math.max(0, (oldWindowHeight - oldCanvasHeight)/2)
+  canvasElm.css("margin-top", canvasAdjustment)
+
 $ ->
 
   if Game.isMobile.any()
@@ -132,6 +139,9 @@ $ ->
       docElm.mozRequestFullScreen()
     else if docElm.webkitRequestFullScreen
       docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
+  
+  $(window).resize ->
+    Game.centerCanvas()
 
 Game.render = (index) ->
   Game.Map.render()
