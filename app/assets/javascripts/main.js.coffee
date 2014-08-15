@@ -5,6 +5,30 @@ window.Routes ||= []
 
 Game.totalTime = 60
 
+
+$ ->
+  Game.login = (callback) ->
+    FB.login(callback, {scope: 'user_friends'})
+  loginCallback = (response) ->
+    console.log "loginCallback", response
+    top.location.href = "https://www.facebook.com/appcenter/YOUR_APP_NAMESPACE"  unless response.status is "connected"
+  onStatusChange = (response) ->
+    unless response.status is "connected"
+      Game.login loginCallback
+    else
+      showHome()
+  onAuthResponseChange = (response) ->
+    console.log "onAuthResponseChange", response
+
+  FB.init
+    appId: 1440904569532160
+    frictionlessRequests: true
+    status: true
+    version: 'v2.0'
+
+  FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange)
+  FB.Event.subscribe('auth.statusChange', onStatusChange)
+
 Map = Game.Map
 
 Game.randomRoute = ->
