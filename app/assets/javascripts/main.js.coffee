@@ -14,7 +14,6 @@ Game.randomRoute = ->
 Game.objects = []
 Game.Map.load(Game.Map.render)
 
-<<<<<<< Updated upstream
 Game.isMobile =
   Android: ->
     return /Android/i.test(navigator.userAgent)
@@ -27,6 +26,12 @@ Game.isMobile =
   any: ->
     return (@Android() || @BlackBerry() || @iOS() || @Windows())
 
+Game.centerPopup = (id) ->
+  message = $("#{id} .message")
+  messageHeight = message.height()
+  newHeight = -messageHeight/2
+  message.css("margin-top", newHeight)
+
 $ ->
 
   if Game.isMobile.any()
@@ -35,18 +40,9 @@ $ ->
   else
     Game.touchRadius = 10
 
-  $("#welcome-message").fadeIn()
-=======
-Game.centerPopup = (id) ->
-  message = $("#{id} .message")
-  messageHeight = message.height()
-  newHeight = -messageHeight/2
-  message.css("margin-top", newHeight)
-
-$ ->
   $("#welcome-message").fadeIn 400, ->
     Game.centerPopup("#welcome-message")
->>>>>>> Stashed changes
+
   Game.canvas = document.getElementById('canvas')
 
   Game.canvas.addEventListener 'mousedown', (e) ->
