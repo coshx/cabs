@@ -122,7 +122,7 @@ $ ->
     $("#score-board").fadeIn 400, ->
       setTimeout (->
         Game.centerPopup("#game-over")
-        ),300
+        ),500
 
   $("#full-screen").click ->
     docElm=document.body
