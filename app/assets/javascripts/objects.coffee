@@ -2,24 +2,31 @@ window.Game ||= {}
 window.Assets ||= {}
 Game.Objects = {}
 
+UserScore = 0
+
+addScore = (score) ->
+  if score > 0.0
+    UserScore = UserScore + score
+    Game.User.render()
+  Game.User.currentBonusLevel = Math.floor(UserScore / 100.0)
+  if Game.User.currentBonusLevel > Game.User.lastBonusLevel
+    Game.updateTimer(5000)
+    Game.User.lastBonusLevel = @currentBonusLevel
+
 Game.User =
-  score: 0.0
+  resetScore: ->
+    UserScore = 0
+  score: ->
+    UserScore
   lastBonusLevel: 0
-  addScore: (score) ->
-    if score > 0.0
-      @score = @score + score
-      @render()
-    @currentBonusLevel = Math.floor(@score / 100.0)
-    if @currentBonusLevel > @lastBonusLevel
-      Game.updateTimer(5000)
-      @lastBonusLevel = @currentBonusLevel
   subtractScore: (score) ->
     if score > 0.0
-      @score = @score - score
+      UserScore = UserScore - score
       @render()
 
   render: ->
-    $("#score").text("$" + @score.toFixed(2))
+    console.log UserScore
+    $("#score").text("$" + UserScore.toFixed(2))
 
   saveScore: (name, score) ->
     UserScore = Parse.Object.extend("UserScore")
@@ -34,7 +41,7 @@ Game.User =
   title: ->
     l = Game.titles.length - 1
     while l >= 0
-      if @score >= Game.titles[l].score
+      if UserScore >= Game.titles[l].score
         result = Game.titles[l]
         l = -1
       l--
@@ -45,8 +52,8 @@ Game.User =
 
   getScores: ->
     @synced = true
-    UserScore = Parse.Object.extend("UserScore")
-    query = new Parse.Query(UserScore)
+    UserScores = Parse.Object.extend("UserScore")
+    query = new Parse.Query(UserScores)
     query.descending("score")
     query.limit(9)
     query.find
@@ -56,13 +63,12 @@ Game.User =
           @scores.push
             name: s.attributes.name
             score: s.attributes.score
-
       error: (error) ->
         @scores = []
   addUserToScores: ->
     @scores.push
       name: @name
-      score: @score
+      score: UserScore
     @scores.sort (a, b) ->
       return 1 if (a.score < b.score)
       return -1 if (a.score > b.score)
@@ -235,7 +241,7 @@ class Game.Objects.Car
     Game.objects.splice(Game.objects.indexOf(@), 1)
     Game.objects.unshift(@)
     Game.objects.push new Game.Objects.ScoreFlash(@pos, fare, "+") if scores
-    Game.User.addScore(fare) if scores
+    addScore(fare) if scores
   
   arrive: ->
     @complete = true
