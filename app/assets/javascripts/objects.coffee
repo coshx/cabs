@@ -63,6 +63,10 @@ Game.User =
     @scores.push
       name: @name
       score: @score
+    @scores.sort (a, b) ->
+      return 1 if (a.score < b.score)
+      return -1 if (a.score > b.score)
+      return 0
     @renderScoreBoard()
   renderScoreBoard: ->
     scoreBoard = "<tr class='scoreboard-header'><td><b>Name</b></td><td><b>Score</b></td></tr>"
