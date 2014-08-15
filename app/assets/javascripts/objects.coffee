@@ -10,7 +10,6 @@ addScore = (score) ->
     Game.User.render()
   Game.User.currentBonusLevel = Math.floor(UserScore / 100.0)
   if Game.User.currentBonusLevel > Game.User.lastBonusLevel
-    console.log("bonus")
     Game.updateTimer(5000)
     Game.User.lastBonusLevel = Game.User.currentBonusLevel
 
