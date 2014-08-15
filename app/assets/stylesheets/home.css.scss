@@ -213,13 +213,17 @@ canvas {
 				margin-top: 20px;
 				margin-left: auto;
 				margin-right: auto;
-				max-width: 280px;
+				max-width: 380px;
 				position: inline-block;
 				table {
 					text-align: left;
 					margin-left: auto;
 					margin-right: auto;
 					min-width: 230px;
+				}
+				td {
+					margin-left: 5px;
+					margin-right: 10px;
 				}
 			}
 		}
