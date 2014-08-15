@@ -28,13 +28,13 @@ Game.User =
     console.log UserScore
     $("#score").text("$" + UserScore.toFixed(2))
 
-  saveScore: (name, score) ->
+  saveScore: (name) ->
     UserScores = Parse.Object.extend("UserScore")
     userScore = new UserScores()
     @name = name
     userScore.save(
       name: name
-      score: score
+      score: UserScore
     ).then (object) =>
       @addUserToScores()
 

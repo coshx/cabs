@@ -116,7 +116,7 @@ $ ->
     Game.objects.push new Game.Objects.XUberCar()
 
   $("#save-score .button").click ->
-    Game.User.saveScore $("#save-score input").val(), Game.User.score()
+    Game.User.saveScore $("#save-score input").val()
     $("#save-score").fadeOut()
     $(".hide-on-board-show").fadeOut()
     $("#score-board").fadeIn 400, ->
