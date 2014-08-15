@@ -99,7 +99,7 @@ $ ->
     return
 
   $("#game-over-button").click ->
-    Game.User.score = 0.0
+    Game.User.resetScore()
     Game.User.lastBonusLevel = 0
     $(".hide-on-board-show.game-over").fadeIn()
     $("#positive-scores").fadeOut()
@@ -116,7 +116,7 @@ $ ->
     Game.objects.push new Game.Objects.XUberCar()
 
   $("#save-score .button").click ->
-    Game.User.saveScore $("#save-score input").val(), Game.User.score
+    Game.User.saveScore $("#save-score input").val(), Game.User.score()
     $("#save-score").fadeOut()
     $(".hide-on-board-show").fadeOut()
     $("#score-board").fadeIn 400, ->
@@ -149,7 +149,7 @@ Game.bonusTime = 0
 Game.gameOver = ->
   for object in Game.objects.filter(Game.alive)
     object.kill()
-  if Game.User.score > 0
+  if Game.User.score() > 0
     $("#positive-scores").fadeIn()
   else
     $("#negative-scores").fadeIn()
@@ -158,7 +158,7 @@ Game.gameOver = ->
   $("#game-title").text(title.title)
   $("#share-button").html("<div class='fb-share-button' data-type='button' data-width='70px' data-href='http://www.angry.cab/title/#{title.slug}'></div>")
   window.FB.XFBML.parse(document.getElementById('share-button'));
-  $("#game-over .scores").text(Math.abs(Game.User.score).toFixed(2))
+  $("#game-over .scores").text(Math.abs(Game.User.score()).toFixed(2))
   $("#game-over").fadeIn 400, ->
     Game.centerPopup("#game-over")
   Game.timer = 0
