@@ -61,7 +61,7 @@ Game.User =
         @scores = []
         $.each results, (i, s) =>
           @scores.push
-            name: s.attributes.name
+            name: s.attributes.name.replace("<", "-").replace(">", "-")
             score: s.attributes.score
       error: (error) ->
         @scores = []
