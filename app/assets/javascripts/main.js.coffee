@@ -3,7 +3,7 @@ window.Assets ||= {}
 Game.Objects ||= {}
 window.Routes ||= []
 
-Game.totalTime = 21
+Game.totalTime = 60
 
 Map = Game.Map
 
