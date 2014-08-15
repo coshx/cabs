@@ -3,7 +3,7 @@ window.Assets ||= {}
 Game.Objects ||= {}
 window.Routes ||= []
 
-Game.totalTime = 60
+Game.totalTime = 21
 
 Map = Game.Map
 
@@ -101,11 +101,11 @@ $ ->
   $("#game-over-button").click ->
     Game.User.score = 0.0
     Game.User.lastBonusLevel = 0
+    $(".hide-on-board-show.game-over").fadeIn()
     $("#positive-scores").fadeOut()
     $("#negative-scores").fadeOut()
     $("#save-score").fadeIn()
     $("#score-board").fadeOut()
-    $(".hide-on-board-show").fadeIn()
     $("#score").text("$0.00")
     Game.lastTime = Date.now()
     Game.startTime = Date.now()
@@ -120,7 +120,9 @@ $ ->
     $("#save-score").fadeOut()
     $(".hide-on-board-show").fadeOut()
     $("#score-board").fadeIn 400, ->
-      Game.centerPopup("#game-over")
+      setTimeout (->
+        Game.centerPopup("#game-over")
+        ),300
 
   $("#full-screen").click ->
     docElm=document.body

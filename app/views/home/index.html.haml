@@ -56,7 +56,7 @@
 .fade#game-over{style: 'display: none'}
   .message
     =image_tag('angrycab_taxi.png', width: "60px")
-    %h1.hide-on-board-show
+    %h1.hide-on-board-show.game-over
       Game Over.
     .end-note#positive-scores.hide-on-board-show{style: 'display: none'}
       Congruatulations, you've earned $<span class="scores"></span> by robbing drivers.
