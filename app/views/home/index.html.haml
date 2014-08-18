@@ -21,27 +21,14 @@
     %p
       The Taxi Cab Unions of New York City are not happy with new companies disrupting their market. They've hired you to take satellite guns and destroy their competition.
     %ol.rules
-      %li
-        You have 60 seconds.
-      %li
-        Destroy cars to collect fares. $100 = 5 extra seconds.
-      %li
-        More distance = more money. Dots indicate distance.
-      %li
-        .rotate-car-image.make-smaller
-          =image_tag('sprites/uberx.png', width: "40px")
-        .text
-          < 
-        .rotate-car-image.make-smaller
-          =image_tag('sprites/black.png', width: "40px")
-        .text
-          <
-        .lyft.make-smaller
-          =image_tag('sprites/lyft.png', width: "30px")
-      %li
-        Collisions = No Points
-      %li
-        Destroy cars before their destination or LOSE money!
+      %p
+        You have 60 seconds to collect as MUCH money as you can! <br>
+        Click on a car to destroy it and collect its fare. <br>
+        Mouse over a car to view its route on the map. <br>
+        The further a car has traveled, the higher its fare will be. <br>
+        Use the green dots to identify cars with high fares. <br>
+        Wait until a car accumulates a high fare before clicking! <br>
+        But watch out: if a car reaches its destination, you’ll lose money.
     .button
       .before
         .tracer
