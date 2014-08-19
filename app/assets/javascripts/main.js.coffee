@@ -196,7 +196,7 @@ Game.updateTimer = (bonus) ->
       Game.gameOver()
 
 
-  maxCars = ((60 - Game.timer) / 10) + 4
+  maxCars = 30
   maxCars -= 1 if Game.timer > 40 
   minCars = ((60 - Game.timer) / 12) + 2
   if Game.objects.filter(Game.alive).length < maxCars && 0 < Game.timer < 57
